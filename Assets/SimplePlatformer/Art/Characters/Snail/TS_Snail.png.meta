@@ -1,0 +1,373 @@
+fileFormatVersion: 2
+guid: c4027a341405574479aace5f8204f0b6
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3601721528352159093
+    second: TS_Snail_0
+  - first:
+      213: 2737174874512216409
+    second: TS_Snail_1
+  - first:
+      213: -537771496438961167
+    second: TS_Snail_2
+  - first:
+      213: -4217780500403280015
+    second: TS_Snail_3
+  - first:
+      213: -1807644801184325908
+    second: TS_Snail_4
+  - first:
+      213: 8458551731295887686
+    second: TS_Snail_5
+  - first:
+      213: 1217691154992902237
+    second: TS_Snail_6
+  - first:
+      213: -6350155161055210328
+    second: TS_Snail_7
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: TS_Snail_0
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 5
+        width: 17
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 7.5, y: 0.5}
+        - {x: 7.5, y: 3.5}
+        - {x: -7.5, y: 3.5}
+        - {x: -7.5, y: -5.5}
+        - {x: 7.5, y: -5.5}
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8a41ba4a5d140ec0800000000000000
+      internalID: -3601721528352159093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TS_Snail_1
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 5
+        width: 20
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 9, y: 3.5}
+        - {x: 8, y: 3.5}
+        - {x: -10, y: 3.5}
+        - {x: -8, y: -2.5}
+        - {x: -5, y: -5.5}
+        - {x: 9, y: -5.5}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 951dc63db066cf520800000000000000
+      internalID: 2737174874512216409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TS_Snail_2
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 5
+        width: 26
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 12, y: 2.5}
+        - {x: 11, y: 3.5}
+        - {x: -13, y: 3.5}
+        - {x: -13, y: 0.5}
+        - {x: -4, y: -5.5}
+        - {x: 12, y: -5.5}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1fbec685ca37988f0800000000000000
+      internalID: -537771496438961167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TS_Snail_3
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 5
+        width: 26
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 12, y: 3.5}
+        - {x: 11, y: 3.5}
+        - {x: -13, y: 3.5}
+        - {x: -13, y: -0.5}
+        - {x: -5, y: -5.5}
+        - {x: 12, y: -5.5}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 177a4ec4bfe6775c0800000000000000
+      internalID: -4217780500403280015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TS_Snail_4
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 5
+        width: 28
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 13, y: 1.5}
+        - {x: 11, y: 3.5}
+        - {x: -1, y: 2.5}
+        - {x: -14, y: 2.5}
+        - {x: -14, y: -2.5}
+        - {x: -11, y: -5.5}
+        - {x: 13, y: -5.5}
+      tessellationDetail: 0
+      bones: []
+      spriteID: cee935171a4f9e6e0800000000000000
+      internalID: -1807644801184325908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TS_Snail_5
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 5
+        width: 21
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 9.5, y: 3.5}
+        - {x: -10.5, y: 3.5}
+        - {x: -10.5, y: -1.5}
+        - {x: -9.5, y: -5.5}
+        - {x: 9.5, y: -5.5}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 641282afbffc26570800000000000000
+      internalID: 8458551731295887686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TS_Snail_6
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 5
+        width: 18
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 8, y: 1.5}
+        - {x: 6, y: 3.5}
+        - {x: -1, y: 3.5}
+        - {x: -8, y: 4.5}
+        - {x: -9, y: 4.5}
+        - {x: -8, y: -3.5}
+        - {x: -7, y: -5.5}
+        - {x: 8, y: -5.5}
+      tessellationDetail: 0
+      bones: []
+      spriteID: d50bc7367ab16e010800000000000000
+      internalID: 1217691154992902237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TS_Snail_7
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 5
+        width: 17
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape:
+      - - {x: 8.5, y: 3.5}
+        - {x: -8.5, y: 4.5}
+        - {x: -7.5, y: -3.5}
+        - {x: -6.5, y: -5.5}
+        - {x: 8.5, y: -5.5}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a4d0bc8687bfd7a0800000000000000
+      internalID: -6350155161055210328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 36261d0f04bbea643bde691f20adb68b
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      TS_Snail_0: -3601721528352159093
+      TS_Snail_1: 2737174874512216409
+      TS_Snail_2: -537771496438961167
+      TS_Snail_3: -4217780500403280015
+      TS_Snail_4: -1807644801184325908
+      TS_Snail_5: 8458551731295887686
+      TS_Snail_6: 1217691154992902237
+      TS_Snail_7: -6350155161055210328
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
