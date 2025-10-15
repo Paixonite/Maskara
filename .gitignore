@@ -11,6 +11,7 @@ export_presets.cfg
 # Arquivos de compilação e executáveis (builds)
 build/
 Builds/
+*.uid
 *.exe
 *.apk
 *.aab
