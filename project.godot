@@ -11,6 +11,5 @@ config_version=5
 [application]
 
 config/name="Masker"
-run/main_scene="/run/user/562711864/doc/b9268be0/game.tscn"
+run/main_scene="uid://dplybc1kq0h3n"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://icon.svg"
