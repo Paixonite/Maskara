@@ -20,12 +20,13 @@ func update_hud() :
 		
 	for i in range(health.maxHealth):
 		var h = health_scene.instantiate()
-		if(i <    health.currentHealth):
-			h.texture = load("res://Sprites/masker_right.png")
+		add_child(h)
+		if(i < health.currentHealth):
+			h.texture = load("res://Sprites/heart.png")
 			pass
 		else:
-			h.texture = load("res://Sprites/masker_left.png")
+			h.texture = load("res://Sprites/heart_empty.png")
 			pass
-			
-		h.position.x = i*-150
-		add_child(h)
+		h.scale *= 5
+		h.position.x = 300 - i*150
+		h.position.y = 300
