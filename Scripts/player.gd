@@ -34,6 +34,7 @@ func _process(delta: float) -> void:
 		$Pivot/Mask.texture = load("res://Sprites/Masks/happy.png")
 		SPEED = 750
 		attackType = AttackType.FISICO
+		physical_attack_cooldown = 0.2
 	if mask == Masks.SAD :
 		$Pivot/Mask.texture = load("res://Sprites/Masks/sad.png")
 		SPEED = 500
@@ -64,7 +65,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 	if Input.is_action_just_pressed("attack") and can_attack:
-		match current_attack:
+		match attackType:
 			AttackType.FISICO: _do_attack_fisico()
 			AttackType.PROJETIL: _do_attack_projetil()
 
@@ -125,7 +126,10 @@ func _do_attack_fisico():
 	_start_cooldown(physical_attack_cooldown)
 
 func recoil(origin:Vector2):
-	pass
+	var dir = (global_position - origin).normalized()
+	velocity += dir * 200
+	velocity.y = -250
+
 
 func _do_attack_projetil():
 	print("EXECUTANDO ATAQUE PROJÉTIL!")

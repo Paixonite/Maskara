@@ -28,5 +28,5 @@ func update_hud() :
 			h.texture = load("res://Sprites/heart_empty.png")
 			pass
 		h.scale *= 5
-		h.position.x = 300 - i*150
+		h.position.x = 30 - i*150
 		h.position.y = 300
