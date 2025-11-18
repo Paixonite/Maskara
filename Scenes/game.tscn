@@ -1,0 +1,251 @@
+[gd_scene load_steps=20 format=3 uid="uid://cl1dssb7c28x2"]
+
+[ext_resource type="Script" uid="uid://6enirma81lsk" path="res://Scripts/player.gd" id="1_i6g32"]
+[ext_resource type="Texture2D" uid="uid://cmc725y8k3tfm" path="res://Sprites/walk_cycle_eye.png" id="2_1l0tm"]
+[ext_resource type="Texture2D" uid="uid://nafwts5ux6o3" path="res://Sprites/walk_cycle_head.png" id="3_v158k"]
+[ext_resource type="Texture2D" uid="uid://qnnryw4ycgnn" path="res://Sprites/walk_cycle_body.png" id="4_h4fw4"]
+[ext_resource type="Script" uid="uid://bs6esjgtrh6bs" path="res://Scripts/hud.gd" id="5_ldgsr"]
+[ext_resource type="Script" uid="uid://t1cy63fk6x1w" path="res://Scripts/health.gd" id="6_o5yvi"]
+[ext_resource type="Script" uid="uid://cfv5p02mfbst3" path="res://Scenes/Bosses/player_area_2d.gd" id="8_v158k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oawv2"]
+size = Vector2(215.94467, 150.34758)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1l0tm"]
+load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"
+
+[sub_resource type="Resource" id="Resource_v158k"]
+metadata/__load_path__ = "res://health_element.gd"
+
+[sub_resource type="PackedScene" id="PackedScene_h4fw4"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"names": PackedStringArray("Health", "TextureRect", "offset_right", "offset_bottom", "texture", "script"),
+"node_count": 1,
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 4, 2, 0, 3, 1, 4, 2, 5, 3, 0),
+"variants": [40.0, 40.0, SubResource("CompressedTexture2D_1l0tm"), SubResource("Resource_v158k")],
+"version": 3
+}
+
+[sub_resource type="Animation" id="Animation_ryrav"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Eye:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_eow3j"]
+resource_name = "idle"
+step = 0.0
+
+[sub_resource type="Animation" id="Animation_7jktm"]
+resource_name = "walk"
+length = 0.45
+loop_mode = 1
+step = 0.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0012447862, 0.09033788, 0.18160309, 0.2716993, 0.36247066),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.089654885, 0.18134739, 0.27100226, 0.36065716),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Eye:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0899242, 0.1824549, 0.27151883, 0.36144304),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eow3j"]
+_data = {
+&"RESET": SubResource("Animation_ryrav"),
+&"idle": SubResource("Animation_eow3j"),
+&"walk": SubResource("Animation_7jktm")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h4fw4"]
+size = Vector2(219.4444, 154.44434)
+
+[sub_resource type="Gradient" id="Gradient_1l0tm"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xm4se"]
+gradient = SubResource("Gradient_1l0tm")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0er1k"]
+size = Vector2(64, 64)
+
+[node name="Game" type="Node2D"]
+
+[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("animations")]
+z_index = 1
+position = Vector2(218, 455)
+scale = Vector2(-0.36, 0.36)
+script = ExtResource("1_i6g32")
+animations = NodePath("AnimationPlayer")
+frictionFactor = 0.52
+gravityFactor = 1.1
+
+[node name="Eye" type="Sprite2D" parent="Player"]
+z_index = 1
+position = Vector2(-72.22222, 0)
+scale = Vector2(1.0000001, 1.0000001)
+texture = ExtResource("2_1l0tm")
+hframes = 3
+vframes = 2
+metadata/_edit_lock_ = true
+
+[node name="Head" type="Sprite2D" parent="Player"]
+position = Vector2(-72.22222, 2.777778)
+texture = ExtResource("3_v158k")
+hframes = 3
+vframes = 2
+metadata/_edit_lock_ = true
+
+[node name="Body" type="Sprite2D" parent="Player"]
+texture = ExtResource("4_h4fw4")
+offset = Vector2(-70, 0)
+hframes = 3
+vframes = 2
+frame = 5
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(-75.36096, 63.888916)
+scale = Vector2(1.0000001, 1.0000001)
+shape = SubResource("RectangleShape2D_oawv2")
+debug_color = Color(4.813075e-08, 0.3999341, 0.4707517, 0.41960785)
+metadata/_edit_lock_ = true
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+offset = Vector2(0, -100)
+metadata/_edit_lock_ = true
+
+[node name="HUD" type="Control" parent="Player/Camera2D" node_paths=PackedStringArray("health")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1191.6666
+offset_top = -1066.6666
+offset_right = 1191.6666
+offset_bottom = -1066.6666
+script = ExtResource("5_ldgsr")
+health = NodePath("../../HealthManager")
+health_scene = SubResource("PackedScene_h4fw4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+libraries = {
+&"": SubResource("AnimationLibrary_eow3j")
+}
+
+[node name="HealthManager" type="Node2D" parent="Player"]
+position = Vector2(605.5556, -1263.8889)
+rotation = 3.1415927
+scale = Vector2(2.777778, -2.777778)
+script = ExtResource("6_o5yvi")
+currentHealth = 5
+
+[node name="Area2D" type="Area2D" parent="Player"]
+script = ExtResource("8_v158k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
+position = Vector2(-76.388794, 67.22229)
+scale = Vector2(1.0000001, 1.0000001)
+shape = SubResource("RectangleShape2D_h4fw4")
+
+[node name="Foreground" type="Node2D" parent="."]
+position = Vector2(244, 455)
+rotation = 3.1415927
+scale = Vector2(0.36000004, -0.36000004)
+
+[node name="Ground" type="StaticBody2D" parent="Foreground"]
+position = Vector2(-2.777832, 369.44446)
+rotation = 3.1415927
+scale = Vector2(112.66665, -2.7777774)
+
+[node name="Sprite2D" type="Sprite2D" parent="Foreground/Ground"]
+texture = SubResource("GradientTexture2D_xm4se")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Foreground/Ground"]
+shape = SubResource("RectangleShape2D_0er1k")
+
+[node name="Ground2" type="StaticBody2D" parent="Foreground"]
+position = Vector2(-702.7777, -24.999878)
+rotation = 3.1415927
+scale = Vector2(9.666654, -2.7777774)
+
+[node name="Sprite2D" type="Sprite2D" parent="Foreground/Ground2"]
+texture = SubResource("GradientTexture2D_xm4se")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Foreground/Ground2"]
+shape = SubResource("RectangleShape2D_0er1k")
+
+[node name="Ground3" type="StaticBody2D" parent="Foreground"]
+position = Vector2(-1630.5553, -383.33325)
+rotation = 3.1415927
+scale = Vector2(9.666654, -2.7777774)
+
+[node name="Sprite2D" type="Sprite2D" parent="Foreground/Ground3"]
+texture = SubResource("GradientTexture2D_xm4se")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Foreground/Ground3"]
+shape = SubResource("RectangleShape2D_0er1k")

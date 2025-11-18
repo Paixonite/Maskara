@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddwwr37r2obqg"]
+
+[ext_resource type="Texture2D" uid="uid://bubox28cer8sj" path="res://Sprites/pit_ball.png" id="1_colop"]
+[ext_resource type="Script" uid="uid://dn45l8rnq4nxj" path="res://Scenes/Instances/pit_ball.gd" id="1_ge6bb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vpo42"]
+
+[node name="Pit_Ball" type="Area2D"]
+scale = Vector2(2.6400003, 2.6400003)
+script = ExtResource("1_ge6bb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_colop")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vpo42")
