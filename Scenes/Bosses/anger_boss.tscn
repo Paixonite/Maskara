@@ -235,7 +235,6 @@ position = Vector2(605.5556, -1263.8889)
 rotation = 3.1415927
 scale = Vector2(2.777778, -2.777778)
 script = ExtResource("7_y2shf")
-maxHealth = 5
 currentHealth = 5
 
 [node name="Area2D" type="Area2D" parent="Player"]
