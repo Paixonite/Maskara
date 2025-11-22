@@ -1,4 +1,4 @@
-class_name Damage extends Area2D
+extends Damage
 
 var vel:Vector2
 var acc:Vector2

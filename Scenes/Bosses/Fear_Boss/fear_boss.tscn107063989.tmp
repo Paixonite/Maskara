@@ -1,0 +1,311 @@
+[gd_scene load_steps=32 format=3 uid="uid://s264ksnh8w18"]
+
+[ext_resource type="Script" uid="uid://b27ckixrl7p08" path="res://Scenes/Bosses/CameraShake.gd" id="1_0s28v"]
+[ext_resource type="Script" uid="uid://6enirma81lsk" path="res://Scripts/player.gd" id="1_kqa3a"]
+[ext_resource type="Texture2D" uid="uid://djfsfs0hsbkba" path="res://Sprites/Masks/happy.png" id="2_1vqjp"]
+[ext_resource type="Script" uid="uid://bs6esjgtrh6bs" path="res://Scripts/hud.gd" id="2_aum8m"]
+[ext_resource type="Texture2D" uid="uid://bukx1ehe7d2i8" path="res://Sprites/walk_cycle-Sheet.png" id="3_c8i1p"]
+[ext_resource type="PackedScene" uid="uid://5ripdy3giq5a" path="res://Scenes/Instances/heart.tscn" id="3_nh0no"]
+[ext_resource type="Texture2D" uid="uid://dv08sispawdp1" path="res://Sprites/idle_cycle-Sheet.png" id="4_0s28v"]
+[ext_resource type="Texture2D" uid="uid://dguvla8e1qjgu" path="res://Sprites/attack-Sheet.png" id="5_aum8m"]
+[ext_resource type="Script" uid="uid://dwvg7krbkbpxb" path="res://Scripts/mask.gd" id="6_aum8m"]
+[ext_resource type="Script" uid="uid://t1cy63fk6x1w" path="res://Scripts/health.gd" id="6_nh0no"]
+[ext_resource type="Script" uid="uid://cfv5p02mfbst3" path="res://Scenes/Bosses/player_area_2d.gd" id="7_6cg8m"]
+[ext_resource type="Script" uid="uid://cfk1mfgnwu7th" path="res://Scenes/Bosses/Fear_Boss/fear_boss.gd" id="12_nh0no"]
+[ext_resource type="Texture2D" uid="uid://ty0e5ws6cgy5" path="res://Sprites/fear_boss.png" id="13_0a4ef"]
+[ext_resource type="Script" uid="uid://djltdutdglfov" path="res://Scenes/Bosses/Fear_Boss/head.gd" id="13_6cg8m"]
+[ext_resource type="Texture2D" uid="uid://dt80nfjyk0coc" path="res://Sprites/fear_boss_hat.png" id="14_yqhjx"]
+[ext_resource type="PackedScene" uid="uid://ddwwr37r2obqg" path="res://Scenes/Instances/pit_ball.tscn" id="15_jyq6w"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0a4ef"]
+radius = 86.4243
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yqhjx"]
+size = Vector2(163.16667, 180.72922)
+
+[sub_resource type="Animation" id="Animation_ryrav"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Idle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/Walk:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_jlm4f"]
+resource_name = "attack"
+length = 0.2
+
+[sub_resource type="Animation" id="Animation_eow3j"]
+resource_name = "idle"
+length = 0.5
+loop_mode = 1
+step = 0.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Idle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.07324512, 0.15125358, 0.22082204, 0.30494624, 0.37100914),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_7jktm"]
+resource_name = "walk"
+length = 0.3
+loop_mode = 1
+step = 0.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Walk:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0017890781, 0.07806827, 0.15358725, 0.22986639),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eow3j"]
+_data = {
+&"RESET": SubResource("Animation_ryrav"),
+&"attack": SubResource("Animation_jlm4f"),
+&"idle": SubResource("Animation_eow3j"),
+&"walk": SubResource("Animation_7jktm")
+}
+
+[sub_resource type="Animation" id="Animation_6ph36"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/AttackHitbox/Attack:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_biar6"]
+resource_name = "attack"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/AttackHitbox/Attack:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.10000001, 0.13333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rnkra"]
+_data = {
+&"RESET": SubResource("Animation_6ph36"),
+&"attack": SubResource("Animation_biar6")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xh1yx"]
+size = Vector2(163.88895, 179.44434)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jyq6w"]
+size = Vector2(70.76923, 44.42308)
+
+[sub_resource type="Gradient" id="Gradient_0er1k"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0s28v"]
+gradient = SubResource("Gradient_0er1k")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aum8m"]
+size = Vector2(64, 64)
+
+[node name="FearBoss" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+z_index = 10
+position = Vector2(417.99997, 372.99994)
+rotation = -3.1415925
+scale = Vector2(0.36, -0.36)
+offset = Vector2(0, -100)
+script = ExtResource("1_0s28v")
+target = NodePath("../Player")
+metadata/_edit_lock_ = true
+
+[node name="HUD" type="Control" parent="Camera2D" node_paths=PackedStringArray("health")]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1191.6666
+offset_top = -1066.6666
+offset_right = 1191.6666
+offset_bottom = -1066.6666
+script = ExtResource("2_aum8m")
+health = NodePath("../../Player/HealthManager")
+health_scene = ExtResource("3_nh0no")
+
+[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("animations", "animationAttack", "healthManager")]
+z_index = 1
+position = Vector2(435, 105.99994)
+rotation = 3.1415927
+scale = Vector2(0.36, -0.36)
+script = ExtResource("1_kqa3a")
+animations = NodePath("AnimationPlayer")
+animationAttack = NodePath("AnimationAttack")
+healthManager = NodePath("HealthManager")
+frictionFactor = 0.5
+gravityFactor = 1.1
+
+[node name="Pivot" type="Node2D" parent="Player"]
+
+[node name="Mask" type="Sprite2D" parent="Player/Pivot"]
+z_index = 2
+texture_filter = 1
+position = Vector2(-33.333412, 16.666832)
+scale = Vector2(7.495, 7.495)
+texture = ExtResource("2_1vqjp")
+script = ExtResource("6_aum8m")
+
+[node name="Walk" type="Sprite2D" parent="Player/Pivot"]
+texture_filter = 1
+position = Vector2(-41.666748, 0.00016589946)
+scale = Vector2(6.905001, 6.905001)
+texture = ExtResource("3_c8i1p")
+hframes = 4
+
+[node name="Idle" type="Sprite2D" parent="Player/Pivot"]
+visible = false
+texture_filter = 1
+position = Vector2(-25.00008, 0.00016735648)
+scale = Vector2(6.9049997, 6.9049997)
+texture = ExtResource("4_0s28v")
+hframes = 6
+
+[node name="AttackHitbox" type="Area2D" parent="Player/Pivot"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Pivot/AttackHitbox"]
+position = Vector2(130.55547, 0.00018095561)
+scale = Vector2(1.0000001, 1.0000001)
+shape = SubResource("CircleShape2D_0a4ef")
+metadata/_edit_lock_ = true
+
+[node name="Attack" type="Sprite2D" parent="Player/Pivot/AttackHitbox"]
+visible = false
+texture_filter = 1
+position = Vector2(130.55548, 0.00018095563)
+scale = Vector2(10, 10)
+texture = ExtResource("5_aum8m")
+hframes = 6
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(-8.647095e-05, 19.444613)
+scale = Vector2(1.0000001, 1.0000001)
+shape = SubResource("RectangleShape2D_yqhjx")
+debug_color = Color(4.813075e-08, 0.3999341, 0.4707517, 0.41960785)
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+libraries = {
+&"": SubResource("AnimationLibrary_eow3j")
+}
+
+[node name="AnimationAttack" type="AnimationPlayer" parent="Player"]
+libraries = {
+&"": SubResource("AnimationLibrary_rnkra")
+}
+
+[node name="HealthManager" type="Node2D" parent="Player"]
+position = Vector2(605.5556, -1263.8889)
+rotation = 3.1415927
+scale = Vector2(2.777778, -2.777778)
+script = ExtResource("6_nh0no")
+currentHealth = 5
+
+[node name="DamageHitbox" type="Area2D" parent="Player"]
+position = Vector2(-8.647096e-05, 19.444614)
+script = ExtResource("7_6cg8m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/DamageHitbox"]
+scale = Vector2(1.0000001, 1.0000001)
+shape = SubResource("RectangleShape2D_xh1yx")
+metadata/_edit_lock_ = true
+
+[node name="Fear_Boss" type="Area2D" parent="." node_paths=PackedStringArray("target")]
+position = Vector2(432.00003, 101)
+scale = Vector2(5.2, 5.2)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("12_nh0no")
+target = NodePath("../Player")
+
+[node name="Body" type="Area2D" parent="Fear_Boss"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Fear_Boss/Body"]
+texture_filter = 1
+texture = ExtResource("13_0a4ef")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fear_Boss/Body"]
+position = Vector2(-1.7307739, 12.403847)
+shape = SubResource("RectangleShape2D_jyq6w")
+
+[node name="Hat" type="Area2D" parent="Fear_Boss"]
+script = ExtResource("13_6cg8m")
+pit_balls = ExtResource("15_jyq6w")
+
+[node name="Sprite2D" type="Sprite2D" parent="Fear_Boss/Hat"]
+texture_filter = 1
+position = Vector2(-5.8687656e-06, -15.576924)
+texture = ExtResource("14_yqhjx")
+offset = Vector2(0, 15.59)
+
+[node name="Foreground" type="Node2D" parent="."]
+
+[node name="Ground" type="StaticBody2D" parent="Foreground"]
+position = Vector2(-158.33345, 1530.5555)
+rotation = 3.1415927
+scale = Vector2(112.66665, -38.999996)
+collision_layer = 3
+collision_mask = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Foreground/Ground"]
+z_index = 1
+texture = SubResource("GradientTexture2D_0s28v")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Foreground/Ground"]
+shape = SubResource("RectangleShape2D_aum8m")
+metadata/_edit_lock_ = true
+
+[connection signal="area_entered" from="Player/DamageHitbox" to="Player/DamageHitbox" method="_on_area_entered"]
