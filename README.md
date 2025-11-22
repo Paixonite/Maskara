@@ -1,2 +1,0 @@
-# Maskara
-Trabalho final TAPOO
