@@ -1,0 +1,4 @@
+res://Scenes/game.tscn
+res://Scenes/SpriteButton.gd
+res://Scenes/Bosses/Surpriese_Boss/surprise_boss.tscn
+res://Scripts/player.gd
