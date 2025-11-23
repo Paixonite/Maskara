@@ -1,0 +1,235 @@
+[gd_scene load_steps=24 format=3 uid="uid://byklja0xvswjw"]
+
+[ext_resource type="Script" uid="uid://6enirma81lsk" path="res://Scripts/player.gd" id="1_qojvu"]
+[ext_resource type="Texture2D" uid="uid://djfsfs0hsbkba" path="res://Sprites/Masks/happy.png" id="2_qqbq4"]
+[ext_resource type="Script" uid="uid://dwvg7krbkbpxb" path="res://Scripts/mask.gd" id="3_o2aym"]
+[ext_resource type="Shader" uid="uid://5upu7klafshg" path="res://Shaders/flash.gdshader" id="4_hptp8"]
+[ext_resource type="Texture2D" uid="uid://bukx1ehe7d2i8" path="res://Sprites/walk_cycle-Sheet.png" id="5_se8hx"]
+[ext_resource type="Texture2D" uid="uid://dv08sispawdp1" path="res://Sprites/idle_cycle-Sheet.png" id="6_jh6g5"]
+[ext_resource type="Script" uid="uid://b5g8ycjqc7eba" path="res://Scripts/attack_hitbox.gd" id="7_ywb2l"]
+[ext_resource type="Texture2D" uid="uid://dguvla8e1qjgu" path="res://Sprites/attack-Sheet.png" id="8_3juxf"]
+[ext_resource type="Script" uid="uid://t1cy63fk6x1w" path="res://Scripts/health.gd" id="9_pxgsd"]
+[ext_resource type="Script" uid="uid://cfv5p02mfbst3" path="res://Scenes/Bosses/player_area_2d.gd" id="10_ks4ci"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vivgl"]
+shader = ExtResource("4_hptp8")
+shader_parameter/color = Vector4(1, 1, 1, 1)
+shader_parameter/flashState = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xfps8"]
+shader = ExtResource("4_hptp8")
+shader_parameter/color = Vector4(1, 1, 1, 1)
+shader_parameter/flashState = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vivgl"]
+radius = 86.4243
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dc0mw"]
+size = Vector2(163.16667, 180.72922)
+
+[sub_resource type="Animation" id="Animation_ryrav"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Idle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/Walk:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_jlm4f"]
+resource_name = "attack"
+length = 0.2
+
+[sub_resource type="Animation" id="Animation_eow3j"]
+resource_name = "idle"
+length = 0.5
+loop_mode = 1
+step = 0.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Idle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.07324512, 0.15125358, 0.22082204, 0.30494624, 0.37100914),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_7jktm"]
+resource_name = "walk"
+length = 0.3
+loop_mode = 1
+step = 0.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Walk:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0017890781, 0.07806827, 0.15358725, 0.22986639),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eow3j"]
+_data = {
+&"RESET": SubResource("Animation_ryrav"),
+&"attack": SubResource("Animation_jlm4f"),
+&"idle": SubResource("Animation_eow3j"),
+&"walk": SubResource("Animation_7jktm")
+}
+
+[sub_resource type="Animation" id="Animation_6ph36"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/AttackHitbox/Attack:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_biar6"]
+resource_name = "attack"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/AttackHitbox/Attack:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.10000001, 0.13333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rnkra"]
+_data = {
+&"RESET": SubResource("Animation_6ph36"),
+&"attack": SubResource("Animation_biar6")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xfps8"]
+size = Vector2(163.88895, 179.44434)
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animations", "animationAttack", "healthManager")]
+z_index = 1
+rotation = -3.1415925
+scale = Vector2(0.36, -0.36)
+script = ExtResource("1_qojvu")
+animations = NodePath("AnimationPlayer")
+animationAttack = NodePath("AnimationAttack")
+healthManager = NodePath("HealthManager")
+frictionFactor = 0.5
+gravityFactor = 1.1
+
+[node name="Pivot" type="Node2D" parent="."]
+
+[node name="Mask" type="Sprite2D" parent="Pivot"]
+z_index = 2
+texture_filter = 1
+position = Vector2(-33.333412, 16.666832)
+scale = Vector2(7.495, 7.495)
+texture = ExtResource("2_qqbq4")
+script = ExtResource("3_o2aym")
+
+[node name="Walk" type="Sprite2D" parent="Pivot"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_vivgl")
+position = Vector2(-41.666748, 0.00016589946)
+scale = Vector2(6.905001, 6.905001)
+texture = ExtResource("5_se8hx")
+hframes = 4
+
+[node name="Idle" type="Sprite2D" parent="Pivot"]
+visible = false
+texture_filter = 1
+material = SubResource("ShaderMaterial_xfps8")
+position = Vector2(-25.00008, 0.00016735648)
+scale = Vector2(6.9049997, 6.9049997)
+texture = ExtResource("6_jh6g5")
+hframes = 6
+
+[node name="AttackHitbox" type="Area2D" parent="Pivot"]
+script = ExtResource("7_ywb2l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/AttackHitbox"]
+position = Vector2(130.55547, 0.00018095561)
+scale = Vector2(1.0000001, 1.0000001)
+shape = SubResource("CircleShape2D_vivgl")
+metadata/_edit_lock_ = true
+
+[node name="Attack" type="Sprite2D" parent="Pivot/AttackHitbox"]
+visible = false
+texture_filter = 1
+position = Vector2(130.55548, 0.00018095563)
+scale = Vector2(10, 10)
+texture = ExtResource("8_3juxf")
+hframes = 6
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-8.647095e-05, 19.444613)
+scale = Vector2(1.0000001, 1.0000001)
+shape = SubResource("RectangleShape2D_dc0mw")
+debug_color = Color(4.813075e-08, 0.3999341, 0.4707517, 0.41960785)
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_eow3j")
+}
+
+[node name="AnimationAttack" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_rnkra")
+}
+
+[node name="HealthManager" type="Node2D" parent="."]
+position = Vector2(605.5556, -1263.8889)
+rotation = 3.1415927
+scale = Vector2(2.777778, -2.777778)
+script = ExtResource("9_pxgsd")
+currentHealth = 5
+
+[node name="DamageHitbox" type="Area2D" parent="."]
+position = Vector2(-8.647096e-05, 19.444614)
+script = ExtResource("10_ks4ci")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageHitbox"]
+scale = Vector2(1.0000001, 1.0000001)
+shape = SubResource("RectangleShape2D_xfps8")
+metadata/_edit_lock_ = true
+
+[connection signal="area_entered" from="Pivot/AttackHitbox" to="Pivot/AttackHitbox" method="_on_area_entered"]
+[connection signal="area_entered" from="DamageHitbox" to="DamageHitbox" method="_on_area_entered"]

@@ -1,0 +1,130 @@
+[gd_scene load_steps=16 format=3 uid="uid://doodk4c2vmhft"]
+
+[ext_resource type="Script" uid="uid://8wu4hmga4bs6" path="res://Scenes/Bosses/Anger_Boss/anger_boss_main.gd" id="1_y8tsx"]
+[ext_resource type="PackedScene" uid="uid://byklja0xvswjw" path="res://Scenes/Instances/player.tscn" id="2_womh2"]
+[ext_resource type="PackedScene" uid="uid://xfc33l6y6gxx" path="res://Scenes/Instances/camera_2d.tscn" id="3_3767i"]
+[ext_resource type="Script" uid="uid://drriyb88n13v6" path="res://Scenes/Bosses/Anger_Boss/anger_attack.gd" id="9_6bf3w"]
+[ext_resource type="Texture2D" uid="uid://ckb3g54jeb2kj" path="res://Sprites/anger_boss_body.png" id="10_8aasb"]
+[ext_resource type="Texture2D" uid="uid://fa6bqf1ppv6" path="res://Sprites/hand_anger.png" id="12_biar6"]
+[ext_resource type="Script" uid="uid://dig64xr3y0rcw" path="res://Scenes/Bosses/Anger_Boss/anger_boss.gd" id="12_oykgf"]
+[ext_resource type="Script" uid="uid://bi251fhfy5shg" path="res://Scenes/Bosses/Anger_Boss/damage_hitbox.gd" id="15_ai084"]
+[ext_resource type="Shader" uid="uid://5upu7klafshg" path="res://Shaders/flash.gdshader" id="15_cktsn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y8tsx"]
+shader = ExtResource("15_cktsn")
+shader_parameter/color = Vector4(1, 1, 1, 1)
+shader_parameter/flashState = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oykgf"]
+size = Vector2(144.64206, 126.219574)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6bf3w"]
+size = Vector2(85.05469, 96.408554)
+
+[sub_resource type="Gradient" id="Gradient_hw3f7"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_biar6"]
+gradient = SubResource("Gradient_hw3f7")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jlm4f"]
+size = Vector2(64, 64)
+
+[node name="AngerBoss" type="Node2D" groups=["enemy"]]
+position = Vector2(-2, 0)
+script = ExtResource("1_y8tsx")
+player = ExtResource("2_womh2")
+camera = ExtResource("3_3767i")
+
+[node name="Anger_Boss" type="Area2D" parent="." node_paths=PackedStringArray("target", "camera_to_shake")]
+position = Vector2(419, 362)
+scale = Vector2(0.78772837, 0.70533174)
+script = ExtResource("12_oykgf")
+target = NodePath("")
+camera_to_shake = NodePath("")
+
+[node name="DamageHitbox" type="Area2D" parent="Anger_Boss"]
+position = Vector2(-1.2694732, -82.230804)
+script = ExtResource("15_ai084")
+
+[node name="Sprite2D" type="Sprite2D" parent="Anger_Boss/DamageHitbox"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_y8tsx")
+position = Vector2(-2.861023e-06, 38.279846)
+scale = Vector2(5.7400002, 5.7400002)
+texture = ExtResource("10_8aasb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Anger_Boss/DamageHitbox"]
+shape = SubResource("RectangleShape2D_oykgf")
+metadata/_edit_lock_ = true
+
+[node name="Left" type="Area2D" parent="Anger_Boss"]
+position = Vector2(-267.85883, 38.279858)
+script = ExtResource("9_6bf3w")
+
+[node name="Left_Hand" type="Sprite2D" parent="Anger_Boss/Left"]
+texture_filter = 1
+scale = Vector2(3.56, 3.56)
+texture = ExtResource("12_biar6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Anger_Boss/Left"]
+position = Vector2(0.6347351, -31.190918)
+shape = SubResource("RectangleShape2D_6bf3w")
+
+[node name="Right" type="Area2D" parent="Anger_Boss"]
+position = Vector2(272.93674, 39.697636)
+script = ExtResource("9_6bf3w")
+
+[node name="Right_Hand" type="Sprite2D" parent="Anger_Boss/Right"]
+texture_filter = 1
+scale = Vector2(-3.535, 3.535)
+texture = ExtResource("12_biar6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Anger_Boss/Right"]
+position = Vector2(-1.2694702, -29.773254)
+shape = SubResource("RectangleShape2D_6bf3w")
+
+[node name="Foreground" type="Node2D" parent="."]
+position = Vector2(244, 455)
+rotation = -3.1415925
+scale = Vector2(0.36000004, -0.36000004)
+
+[node name="Ground" type="StaticBody2D" parent="Foreground"]
+position = Vector2(-158.33345, 1530.5555)
+rotation = 3.1415927
+scale = Vector2(112.66665, -38.999996)
+
+[node name="Sprite2D" type="Sprite2D" parent="Foreground/Ground"]
+texture = SubResource("GradientTexture2D_biar6")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Foreground/Ground"]
+shape = SubResource("RectangleShape2D_jlm4f")
+metadata/_edit_lock_ = true
+
+[node name="Ground2" type="StaticBody2D" parent="Foreground"]
+position = Vector2(-4861.1104, 372.2218)
+rotation = 1.5707964
+scale = Vector2(112.66665, -78.333336)
+
+[node name="Sprite2D" type="Sprite2D" parent="Foreground/Ground2"]
+texture = SubResource("GradientTexture2D_biar6")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Foreground/Ground2"]
+shape = SubResource("RectangleShape2D_jlm4f")
+metadata/_edit_lock_ = true
+
+[node name="Ground3" type="StaticBody2D" parent="Foreground"]
+position = Vector2(3911.1106, 566.6669)
+rotation = 1.5707964
+scale = Vector2(112.66665, -78.333336)
+
+[node name="Sprite2D" type="Sprite2D" parent="Foreground/Ground3"]
+texture = SubResource("GradientTexture2D_biar6")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Foreground/Ground3"]
+shape = SubResource("RectangleShape2D_jlm4f")
+metadata/_edit_lock_ = true

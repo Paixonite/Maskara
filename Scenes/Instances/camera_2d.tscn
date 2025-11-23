@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://xfc33l6y6gxx"]
+
+[ext_resource type="Script" uid="uid://b27ckixrl7p08" path="res://Scenes/Bosses/CameraShake.gd" id="1_2ovts"]
+[ext_resource type="Script" uid="uid://bs6esjgtrh6bs" path="res://Scripts/hud.gd" id="2_6k5pb"]
+[ext_resource type="PackedScene" uid="uid://5ripdy3giq5a" path="res://Scenes/Instances/heart.tscn" id="3_56jic"]
+
+[node name="Camera2D" type="Camera2D"]
+z_index = 10
+rotation = -3.1415925
+scale = Vector2(0.36, -0.36)
+offset = Vector2(0, -100)
+script = ExtResource("1_2ovts")
+metadata/_edit_lock_ = true
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1191.6666
+offset_top = -1066.6666
+offset_right = 1191.6666
+offset_bottom = -1066.6666
+script = ExtResource("2_6k5pb")
+health_scene = ExtResource("3_56jic")
