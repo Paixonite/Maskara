@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://doodk4c2vmhft"]
+[gd_scene load_steps=36 format=3 uid="uid://doodk4c2vmhft"]
 
 [ext_resource type="Script" uid="uid://6enirma81lsk" path="res://Scripts/player.gd" id="1_2pkry"]
 [ext_resource type="Texture2D" uid="uid://bukx1ehe7d2i8" path="res://Sprites/walk_cycle-Sheet.png" id="2_6bf3w"]
@@ -10,11 +10,14 @@
 [ext_resource type="Script" uid="uid://t1cy63fk6x1w" path="res://Scripts/health.gd" id="7_y2shf"]
 [ext_resource type="Script" uid="uid://cfv5p02mfbst3" path="res://Scenes/Bosses/player_area_2d.gd" id="8_m2wcn"]
 [ext_resource type="Script" uid="uid://drriyb88n13v6" path="res://Scenes/Bosses/Anger_Boss/anger_attack.gd" id="9_6bf3w"]
+[ext_resource type="Script" uid="uid://b5g8ycjqc7eba" path="res://Scripts/attack_hitbox.gd" id="9_44c7c"]
 [ext_resource type="Texture2D" uid="uid://dguvla8e1qjgu" path="res://Sprites/attack-Sheet.png" id="9_biar6"]
 [ext_resource type="Texture2D" uid="uid://ckb3g54jeb2kj" path="res://Sprites/anger_boss_body.png" id="10_8aasb"]
 [ext_resource type="Texture2D" uid="uid://fa6bqf1ppv6" path="res://Sprites/hand_anger.png" id="12_biar6"]
 [ext_resource type="Script" uid="uid://dig64xr3y0rcw" path="res://Scenes/Bosses/Anger_Boss/anger_boss.gd" id="12_oykgf"]
 [ext_resource type="PackedScene" uid="uid://5ripdy3giq5a" path="res://Scenes/Instances/heart.tscn" id="13_jlm4f"]
+[ext_resource type="Script" uid="uid://bi251fhfy5shg" path="res://Scenes/Bosses/Anger_Boss/damage_hitbox.gd" id="15_ai084"]
+[ext_resource type="Shader" uid="uid://5upu7klafshg" path="res://Shaders/flash.gdshader" id="15_cktsn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_stjmw"]
 radius = 86.4243
@@ -147,6 +150,14 @@ gradient = SubResource("Gradient_hw3f7")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jlm4f"]
 size = Vector2(64, 64)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y8tsx"]
+shader = ExtResource("15_cktsn")
+shader_parameter/color = Vector4(1, 1, 1, 1)
+shader_parameter/flashState = 0.5
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oykgf"]
+size = Vector2(144.64206, 126.219574)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6bf3w"]
 size = Vector2(85.05469, 96.408554)
 
@@ -210,6 +221,7 @@ texture = ExtResource("3_m2wcn")
 hframes = 6
 
 [node name="AttackHitbox" type="Area2D" parent="Player/Pivot"]
+script = ExtResource("9_44c7c")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Pivot/AttackHitbox"]
 position = Vector2(130.55547, 0.00018095561)
@@ -310,11 +322,20 @@ script = ExtResource("12_oykgf")
 target = NodePath("../Player")
 camera_to_shake = NodePath("../Camera2D")
 
-[node name="Body" type="Sprite2D" parent="Anger_Boss"]
+[node name="DamageHitbox" type="Area2D" parent="Anger_Boss"]
+position = Vector2(-1.2694732, -82.230804)
+script = ExtResource("15_ai084")
+
+[node name="Sprite2D" type="Sprite2D" parent="Anger_Boss/DamageHitbox"]
 texture_filter = 1
-position = Vector2(0, -43.95095)
-scale = Vector2(5.74, 5.74)
+material = SubResource("ShaderMaterial_y8tsx")
+position = Vector2(1.2694702, 38.279846)
+scale = Vector2(5.7400002, 5.7400002)
 texture = ExtResource("10_8aasb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Anger_Boss/DamageHitbox"]
+shape = SubResource("RectangleShape2D_oykgf")
+metadata/_edit_lock_ = true
 
 [node name="Left" type="Area2D" parent="Anger_Boss"]
 position = Vector2(-267.85883, 38.279858)
@@ -342,6 +363,7 @@ texture = ExtResource("12_biar6")
 position = Vector2(-1.2694702, -29.773254)
 shape = SubResource("RectangleShape2D_6bf3w")
 
+[connection signal="area_entered" from="Player/Pivot/AttackHitbox" to="Player/Pivot/AttackHitbox" method="_on_area_entered"]
 [connection signal="area_entered" from="Player/DamageHitbox" to="Player/DamageHitbox" method="_on_area_entered"]
 [connection signal="area_entered" from="Anger_Boss/Left" to="Player/DamageHitbox" method="_on_left_area_entered"]
 [connection signal="area_entered" from="Anger_Boss/Right" to="Player/DamageHitbox" method="_on_right_area_entered"]

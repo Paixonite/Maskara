@@ -1,4 +1,4 @@
-extends Area2D
+extends Damageable
 
 var originalPosition
 @export var pit_balls:PackedScene
@@ -6,6 +6,7 @@ var rng := RandomNumberGenerator.new()
 
 func _ready() -> void:
 	originalPosition = position
+	
 
 func attack(target:Node2D) :
 	var p = pit_balls.instantiate()

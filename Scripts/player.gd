@@ -14,7 +14,7 @@ enum Masks { HAPPY, SAD, ANGRY, SURPRISE, FEAR, LOVE }
 @export var mask : Masks
 
 var acceleration
-var jump_power_initial = -800
+var jump_power_initial = -600
 var jump_power = 0
 var jump_time_max = 5
 var jump_timer = 0
@@ -27,6 +27,7 @@ var current_attack: AttackType = AttackType.FISICO
 var can_attack: bool = true
 var physical_attack_cooldown = 0.5
 var projectile_attack_cooldown = 0.8
+var damage = 1
 
 var attackType
 
@@ -58,6 +59,7 @@ func _process(delta: float) -> void:
 		$Pivot/Mask.texture = load("res://Sprites/Masks/love.png")
 		SPEED = 500
 		attackType = AttackType.PROJETIL
+		
 func _physics_process(delta: float) -> void:
 	_process_jump(delta)
 	_process_movement(delta)
@@ -66,7 +68,13 @@ func _physics_process(delta: float) -> void:
 	_process_attack_hitbox()
 
 	move_and_slide()
-
+	#print($Pivot/AttackHitbox/Attack.visible)
+	
+	if Input.is_key_pressed(KEY_W) :
+		$Pivot/AttackHitbox.rotation = deg_to_rad(-90)
+	else :
+		$Pivot/AttackHitbox.rotation = deg_to_rad(0)
+		
 	if Input.is_action_just_pressed("attack") and can_attack:
 		match attackType:
 			AttackType.FISICO: _do_attack_fisico()
@@ -125,18 +133,17 @@ func _input(event):
 		jump_timer = jump_time_max
 
 func _do_attack_fisico():
-	print("EXECUTANDO ATAQUE FÍSICO!")
 	animationAttack.play("attack")
 	_start_cooldown(physical_attack_cooldown)
 
-func recoil(origin:Vector2):
+func recoil(origin:Vector2, strength:float):
+	print("toma")
 	var dir = (global_position - origin).normalized()
-	velocity += dir * 200
-	velocity.y = -250
+	velocity += dir * strength
+	velocity.y -= strength
 
 
 func _do_attack_projetil():
-	print("EXECUTANDO ATAQUE PROJÉTIL!")
 	_start_cooldown(projectile_attack_cooldown)
 
 func _start_cooldown(t):

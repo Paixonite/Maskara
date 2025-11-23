@@ -2,7 +2,7 @@ extends Node2D
 
 @export var maxHealth = 5;
 @export var currentHealth = maxHealth
-@export var cooldownTime = 1.5
+@export var cooldownTime = 2.5
 var cooldown = false
 
 func damage(amount : int) :

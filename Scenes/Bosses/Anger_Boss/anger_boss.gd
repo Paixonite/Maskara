@@ -1,10 +1,11 @@
-extends Area2D
+extends Boss
 
 @export var target: Node2D
 @export var camera_to_shake: Camera2D
 @export var frictionFactor: float = 0.9
 @export var speed: float = 100.0
 @export var speedLimit: float = 300.0
+@export var totalHealth: int = 10
 
 var vel: Vector2 = Vector2.ZERO
 var acc: Vector2 = Vector2.ZERO
@@ -14,6 +15,9 @@ var aux: int = 0
 
 var attacking: bool = false
 var rng := RandomNumberGenerator.new()
+
+func _ready() -> void:
+	health = totalHealth
 
 func _process(delta: float) -> void:
 	if target == null:
@@ -37,6 +41,9 @@ func _process(delta: float) -> void:
 			else:
 				if has_node("Right"):
 					start_attack($Right, target)
+	
+	if health == 0 :
+		queue_free()
 
 
 func start_attack(arm: Node2D, target: Node2D) -> void:
@@ -53,4 +60,3 @@ func start_attack(arm: Node2D, target: Node2D) -> void:
 	var tween = create_tween()
 	tween.tween_interval(1.0)
 	tween.finished.connect(func(): attacking = false)
-	

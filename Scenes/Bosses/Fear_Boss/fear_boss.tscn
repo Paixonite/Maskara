@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://s264ksnh8w18"]
+[gd_scene load_steps=35 format=3 uid="uid://s264ksnh8w18"]
 
 [ext_resource type="Script" uid="uid://b27ckixrl7p08" path="res://Scenes/Bosses/CameraShake.gd" id="1_0s28v"]
 [ext_resource type="Script" uid="uid://6enirma81lsk" path="res://Scripts/player.gd" id="1_kqa3a"]
@@ -11,16 +11,18 @@
 [ext_resource type="Script" uid="uid://dwvg7krbkbpxb" path="res://Scripts/mask.gd" id="6_aum8m"]
 [ext_resource type="Script" uid="uid://t1cy63fk6x1w" path="res://Scripts/health.gd" id="6_nh0no"]
 [ext_resource type="Script" uid="uid://cfv5p02mfbst3" path="res://Scenes/Bosses/player_area_2d.gd" id="7_6cg8m"]
+[ext_resource type="Script" uid="uid://b5g8ycjqc7eba" path="res://Scripts/attack_hitbox.gd" id="9_jyq6w"]
 [ext_resource type="Script" uid="uid://cfk1mfgnwu7th" path="res://Scenes/Bosses/Fear_Boss/fear_boss.gd" id="12_nh0no"]
 [ext_resource type="Texture2D" uid="uid://ty0e5ws6cgy5" path="res://Sprites/fear_boss.png" id="13_0a4ef"]
 [ext_resource type="Script" uid="uid://djltdutdglfov" path="res://Scenes/Bosses/Fear_Boss/head.gd" id="13_6cg8m"]
 [ext_resource type="Texture2D" uid="uid://dt80nfjyk0coc" path="res://Sprites/fear_boss_hat.png" id="14_yqhjx"]
 [ext_resource type="PackedScene" uid="uid://ddwwr37r2obqg" path="res://Scenes/Instances/pit_ball.tscn" id="15_jyq6w"]
+[ext_resource type="Shader" uid="uid://5upu7klafshg" path="res://Shaders/flash.gdshader" id="17_vivgl"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_0a4ef"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_vivgl"]
 radius = 86.4243
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yqhjx"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dc0mw"]
 size = Vector2(163.16667, 180.72922)
 
 [sub_resource type="Animation" id="Animation_ryrav"]
@@ -135,11 +137,16 @@ _data = {
 &"attack": SubResource("Animation_biar6")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xh1yx"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xfps8"]
 size = Vector2(163.88895, 179.44434)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dc0mw"]
+shader = ExtResource("17_vivgl")
+shader_parameter/color = Vector4(1, 1, 1, 1)
+shader_parameter/flashState = 0.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jyq6w"]
-size = Vector2(70.76923, 44.42308)
+size = Vector2(67.5, 34.42308)
 
 [sub_resource type="Gradient" id="Gradient_0er1k"]
 offsets = PackedFloat32Array(1)
@@ -176,8 +183,8 @@ health_scene = ExtResource("3_nh0no")
 
 [node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("animations", "animationAttack", "healthManager")]
 z_index = 1
-position = Vector2(435, 105.99994)
-rotation = 3.1415927
+position = Vector2(417.99997, 516.99994)
+rotation = -3.1415925
 scale = Vector2(0.36, -0.36)
 script = ExtResource("1_kqa3a")
 animations = NodePath("AnimationPlayer")
@@ -212,11 +219,12 @@ texture = ExtResource("4_0s28v")
 hframes = 6
 
 [node name="AttackHitbox" type="Area2D" parent="Player/Pivot"]
+script = ExtResource("9_jyq6w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Pivot/AttackHitbox"]
 position = Vector2(130.55547, 0.00018095561)
 scale = Vector2(1.0000001, 1.0000001)
-shape = SubResource("CircleShape2D_0a4ef")
+shape = SubResource("CircleShape2D_vivgl")
 metadata/_edit_lock_ = true
 
 [node name="Attack" type="Sprite2D" parent="Player/Pivot/AttackHitbox"]
@@ -231,7 +239,7 @@ metadata/_edit_lock_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 position = Vector2(-8.647095e-05, 19.444613)
 scale = Vector2(1.0000001, 1.0000001)
-shape = SubResource("RectangleShape2D_yqhjx")
+shape = SubResource("RectangleShape2D_dc0mw")
 debug_color = Color(4.813075e-08, 0.3999341, 0.4707517, 0.41960785)
 metadata/_edit_lock_ = true
 
@@ -258,7 +266,7 @@ script = ExtResource("7_6cg8m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/DamageHitbox"]
 scale = Vector2(1.0000001, 1.0000001)
-shape = SubResource("RectangleShape2D_xh1yx")
+shape = SubResource("RectangleShape2D_xfps8")
 metadata/_edit_lock_ = true
 
 [node name="Fear_Boss" type="Area2D" parent="." node_paths=PackedStringArray("target")]
@@ -276,19 +284,20 @@ texture_filter = 1
 texture = ExtResource("13_0a4ef")
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Fear_Boss/Body"]
-position = Vector2(-1.7307739, 12.403847)
-shape = SubResource("RectangleShape2D_jyq6w")
-
 [node name="Hat" type="Area2D" parent="Fear_Boss"]
 script = ExtResource("13_6cg8m")
 pit_balls = ExtResource("15_jyq6w")
 
 [node name="Sprite2D" type="Sprite2D" parent="Fear_Boss/Hat"]
 texture_filter = 1
+material = SubResource("ShaderMaterial_dc0mw")
 position = Vector2(-5.8687656e-06, -15.576924)
 texture = ExtResource("14_yqhjx")
 offset = Vector2(0, 15.59)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fear_Boss/Hat"]
+position = Vector2(-0.28845978, -11.634615)
+shape = SubResource("RectangleShape2D_jyq6w")
 
 [node name="Foreground" type="Node2D" parent="."]
 
@@ -308,4 +317,5 @@ metadata/_edit_lock_ = true
 shape = SubResource("RectangleShape2D_aum8m")
 metadata/_edit_lock_ = true
 
+[connection signal="area_entered" from="Player/Pivot/AttackHitbox" to="Player/Pivot/AttackHitbox" method="_on_area_entered"]
 [connection signal="area_entered" from="Player/DamageHitbox" to="Player/DamageHitbox" method="_on_area_entered"]

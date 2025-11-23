@@ -14,7 +14,7 @@ func _process(delta: float) -> void:
 	var target = parent.target
 	if not parent.attacking :
 		var v = target.global_position - self.global_position
-		var angle = v.angle()
+		var angle = v.angle()+deg_to_rad(180)
 		if self == get_parent().get_child(2) :
 			angle += deg_to_rad(180)
 		var r = self.global_rotation

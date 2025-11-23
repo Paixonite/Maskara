@@ -1,15 +1,18 @@
-extends Area2D
+extends Boss
 
 @export var target:Node2D
 @export var jump_height:float = -300
 @export var speed:float = 400
-
+@export var totalHealth:int = 10
 var vel:Vector2
 var attacking = false
 
 var timer: float = 0.0
 var aux: int = 0
 
+func _ready() -> void:
+	health = totalHealth
+	
 func _physics_process(delta: float) -> void:
 	if not attacking:
 		var acc = target.position-position 
