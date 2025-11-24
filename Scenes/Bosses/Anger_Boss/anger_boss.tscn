@@ -1,8 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://doodk4c2vmhft"]
+[gd_scene load_steps=18 format=3 uid="uid://doodk4c2vmhft"]
 
 [ext_resource type="Script" uid="uid://8wu4hmga4bs6" path="res://Scenes/Bosses/Anger_Boss/anger_boss_main.gd" id="1_y8tsx"]
 [ext_resource type="PackedScene" uid="uid://byklja0xvswjw" path="res://Scenes/Instances/player.tscn" id="2_womh2"]
 [ext_resource type="PackedScene" uid="uid://xfc33l6y6gxx" path="res://Scenes/Instances/camera_2d.tscn" id="3_3767i"]
+[ext_resource type="PackedScene" uid="uid://b4yvbqot8cgit" path="res://Scenes/Instances/fire_pillar.tscn" id="5_3767i"]
+[ext_resource type="PackedScene" uid="uid://cmxrvqblubtcq" path="res://Scenes/Instances/fire.tscn" id="6_f61l0"]
 [ext_resource type="Script" uid="uid://drriyb88n13v6" path="res://Scenes/Bosses/Anger_Boss/anger_attack.gd" id="9_6bf3w"]
 [ext_resource type="Texture2D" uid="uid://ckb3g54jeb2kj" path="res://Sprites/anger_boss_body.png" id="10_8aasb"]
 [ext_resource type="Texture2D" uid="uid://fa6bqf1ppv6" path="res://Sprites/hand_anger.png" id="12_biar6"]
@@ -37,12 +39,12 @@ script = ExtResource("1_y8tsx")
 player = ExtResource("2_womh2")
 camera = ExtResource("3_3767i")
 
-[node name="Anger_Boss" type="Area2D" parent="." node_paths=PackedStringArray("target", "camera_to_shake")]
+[node name="Anger_Boss" type="Area2D" parent="."]
 position = Vector2(419, 362)
 scale = Vector2(0.78772837, 0.70533174)
 script = ExtResource("12_oykgf")
-target = NodePath("")
-camera_to_shake = NodePath("")
+firePillars = ExtResource("5_3767i")
+fire = ExtResource("6_f61l0")
 
 [node name="DamageHitbox" type="Area2D" parent="Anger_Boss"]
 position = Vector2(-1.2694732, -82.230804)
@@ -128,3 +130,6 @@ metadata/_edit_lock_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Foreground/Ground3"]
 shape = SubResource("RectangleShape2D_jlm4f")
 metadata/_edit_lock_ = true
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(1091, 557)

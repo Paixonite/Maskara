@@ -35,28 +35,40 @@ var attackType
 func _process(delta: float) -> void:
 	if mask == Masks.HAPPY :
 		$Pivot/Mask.texture = load("res://Sprites/Masks/happy.png")
+		$Pivot/Idle.material.set_shader_parameter("tint_color", Vector4(1, 0.7, 0, 0))
+		$Pivot/Walk.material.set_shader_parameter("tint_color", Vector4(1, 0.7, 0, 0))
 		SPEED = 750
 		attackType = AttackType.FISICO
 		physical_attack_cooldown = 0.2
 	if mask == Masks.SAD :
-		$Pivot/Mask.texture = load("res://Sprites/Masks/sad.png")
+		$Pivot/Mask.texture = load("res://Sprites/Masks/sadness.png")
+		$Pivot/Idle.material.set_shader_parameter("tint_color", Vector4(0, 0.3, 1, 0))
+		$Pivot/Walk.material.set_shader_parameter("tint_color", Vector4(0, 0.3, 1, 0))
 		SPEED = 500
 		attackType = AttackType.PROJETIL
 	if mask == Masks.ANGRY :
 		$Pivot/Mask.texture = load("res://Sprites/Masks/angry.png")
+		$Pivot/Idle.material.set_shader_parameter("tint_color", Vector4(1, 0, 0, 0))
+		$Pivot/Walk.material.set_shader_parameter("tint_color", Vector4(1, 0, 0, 0))
 		SPEED = 500
 		attackType = AttackType.FISICO
 		physical_attack_cooldown = 0.8
 	if mask == Masks.SURPRISE :
-		$Pivot/Mask.texture = load("res://Sprites/Masks/fear.png")
+		$Pivot/Mask.texture = load("res://Sprites/Masks/surprise.png")
+		$Pivot/Idle.material.set_shader_parameter("tint_color", Vector4(0, 0.5, 0.8, 0))
+		$Pivot/Walk.material.set_shader_parameter("tint_color", Vector4(0, 0.5, 0.8, 0))
 		SPEED = 500
 		attackType = AttackType.FISICO
 	if mask == Masks.FEAR :
-		$Pivot/Mask.texture = load("res://Sprites/Masks/surprise.png")
+		$Pivot/Mask.texture = load("res://Sprites/Masks/fear.png")
+		$Pivot/Idle.material.set_shader_parameter("tint_color", Vector4(1, 0, 1, 0))
+		$Pivot/Walk.material.set_shader_parameter("tint_color", Vector4(1, 0, 1, 0))
 		SPEED = 500
 		attackType = AttackType.PROJETIL
 	if mask == Masks.LOVE :
 		$Pivot/Mask.texture = load("res://Sprites/Masks/love.png")
+		$Pivot/Idle.material.set_shader_parameter("tint_color", Vector4(1, 0, 0.5, 0))
+		$Pivot/Walk.material.set_shader_parameter("tint_color", Vector4(1, 0, 0.5, 0))
 		SPEED = 500
 		attackType = AttackType.PROJETIL
 		
@@ -137,7 +149,6 @@ func _do_attack_fisico():
 	_start_cooldown(physical_attack_cooldown)
 
 func recoil(origin:Vector2, strength:float):
-	print("toma")
 	var dir = (global_position - origin).normalized()
 	velocity += dir * strength
 

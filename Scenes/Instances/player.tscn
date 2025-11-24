@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://6enirma81lsk" path="res://Scripts/player.gd" id="1_qojvu"]
 [ext_resource type="Texture2D" uid="uid://djfsfs0hsbkba" path="res://Sprites/Masks/happy.png" id="2_qqbq4"]
 [ext_resource type="Script" uid="uid://dwvg7krbkbpxb" path="res://Scripts/mask.gd" id="3_o2aym"]
-[ext_resource type="Shader" uid="uid://5upu7klafshg" path="res://Shaders/flash.gdshader" id="4_hptp8"]
+[ext_resource type="Shader" uid="uid://g7jtqkcfuxs3" path="res://Shaders/player.gdshader" id="4_qqbq4"]
 [ext_resource type="Texture2D" uid="uid://bukx1ehe7d2i8" path="res://Sprites/walk_cycle-Sheet.png" id="5_se8hx"]
 [ext_resource type="Texture2D" uid="uid://dv08sispawdp1" path="res://Sprites/idle_cycle-Sheet.png" id="6_jh6g5"]
 [ext_resource type="Script" uid="uid://b5g8ycjqc7eba" path="res://Scripts/attack_hitbox.gd" id="7_ywb2l"]
@@ -12,14 +12,16 @@
 [ext_resource type="Script" uid="uid://cfv5p02mfbst3" path="res://Scenes/Bosses/player_area_2d.gd" id="10_ks4ci"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vivgl"]
-shader = ExtResource("4_hptp8")
-shader_parameter/color = Vector4(1, 1, 1, 1)
-shader_parameter/flashState = 0.0
+shader = ExtResource("4_qqbq4")
+shader_parameter/tint_color = Color(1, 1, 1, 1)
+shader_parameter/intensity = 1.0
+shader_parameter/weighted = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xfps8"]
-shader = ExtResource("4_hptp8")
-shader_parameter/color = Vector4(1, 1, 1, 1)
-shader_parameter/flashState = 0.0
+shader = ExtResource("4_qqbq4")
+shader_parameter/tint_color = Color(1, 1, 1, 1)
+shader_parameter/intensity = 0.15
+shader_parameter/weighted = true
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vivgl"]
 radius = 86.4243
@@ -167,7 +169,7 @@ script = ExtResource("3_o2aym")
 texture_filter = 1
 material = SubResource("ShaderMaterial_vivgl")
 position = Vector2(-41.666748, 0.00016589946)
-scale = Vector2(6.905001, 6.905001)
+scale = Vector2(6.905001, 6.749943)
 texture = ExtResource("5_se8hx")
 hframes = 4
 
@@ -184,6 +186,7 @@ hframes = 6
 script = ExtResource("7_ywb2l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/AttackHitbox"]
+visible = false
 position = Vector2(130.55547, 0.00018095561)
 scale = Vector2(1.0000001, 1.0000001)
 shape = SubResource("CircleShape2D_vivgl")
@@ -199,6 +202,7 @@ hframes = 6
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-8.647095e-05, 19.444613)
 scale = Vector2(1.0000001, 1.0000001)
 shape = SubResource("RectangleShape2D_dc0mw")
@@ -223,6 +227,7 @@ script = ExtResource("9_pxgsd")
 currentHealth = 5
 
 [node name="DamageHitbox" type="Area2D" parent="."]
+visible = false
 position = Vector2(-8.647096e-05, 19.444614)
 script = ExtResource("10_ks4ci")
 

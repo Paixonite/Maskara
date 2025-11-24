@@ -3,12 +3,16 @@ extends Boss
 @export var target:Node2D
 @export var jump_height:float = -300
 @export var speed:float = 400
-@export var totalHealth:int = 10
+@export var totalHealth:int = 50
+var rng := RandomNumberGenerator.new()
 var vel:Vector2
 var attacking = false
 
 var timer: float = 0.0
 var aux: int = 0
+
+const DISPERSE = 0
+const RAIN = 1
 
 func _ready() -> void:
 	health = totalHealth
@@ -27,6 +31,16 @@ func _physics_process(delta: float) -> void:
 	if floor(timer) - aux == 1.0:
 		aux = floor(timer)
 		if int(fmod(timer, 1.0)) == 0:
-			$Hat.attack(target)
+			attack()
 		
-		#velocity.x+=(position.x-target.position.x)/250.0
+func attack() :
+	if attacking :
+		return
+		
+	var attack = rng.randi_range(0, 1)
+	attacking = true
+
+	if attack == DISPERSE :
+		$Hat.disperse(target)
+	elif attack == RAIN :
+		$Hat.rain(target)

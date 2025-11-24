@@ -41,7 +41,6 @@ collision_mask = 2
 script = ExtResource("12_nh0no")
 
 [node name="Body" type="Area2D" parent="Fear_Boss"]
-scale = Vector2(0.9899187, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="Fear_Boss/Body"]
 texture_filter = 1

@@ -8,4 +8,3 @@ func _process(delta: float) -> void:
 
 func take_damage(damage) :
 	health -= damage
-	print(health)

@@ -7,4 +7,3 @@ void fragment() {
 	COLOR = mix(pixelColor, color, flashState);
 	COLOR.a *= pixelColor.a;
 }
-
