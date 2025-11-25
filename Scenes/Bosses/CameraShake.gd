@@ -9,9 +9,14 @@ var _current_shake_strength: float = 0.0
 var vel:Vector2
 
 func _process(delta):
-	var tween = create_tween()
-	tween.tween_property(self, "position", target.position-Vector2(0, offsetY), 0.2)
+
+	position = target.position
+	position.y -= offsetY
+		#var tween = create_tween()
+		#tween.tween_property(self, "position", target.position-Vector2(0, offsetY), 0.1)
 	#position.y -= 250
+	#position = target.position
+	#position.y -= offsetY
 	if _current_shake_strength > 0:
 		_current_shake_strength = lerpf(_current_shake_strength, 0.0, shake_decay_rate * delta)
 		

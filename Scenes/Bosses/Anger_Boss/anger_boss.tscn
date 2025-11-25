@@ -23,12 +23,12 @@ size = Vector2(144.64206, 126.219574)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6bf3w"]
 size = Vector2(85.05469, 96.408554)
 
-[sub_resource type="Gradient" id="Gradient_hw3f7"]
+[sub_resource type="Gradient" id="Gradient_f61l0"]
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_biar6"]
-gradient = SubResource("Gradient_hw3f7")
+gradient = SubResource("Gradient_f61l0")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jlm4f"]
 size = Vector2(64, 64)
@@ -131,5 +131,11 @@ metadata/_edit_lock_ = true
 shape = SubResource("RectangleShape2D_jlm4f")
 metadata/_edit_lock_ = true
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Coord" type="Node2D" parent="."]
 position = Vector2(1091, 557)
+
+[node name="Right_Wall" type="Node2D" parent="."]
+position = Vector2(1092, 353)
+
+[node name="Left_Wall" type="Node2D" parent="."]
+position = Vector2(-262, 343)

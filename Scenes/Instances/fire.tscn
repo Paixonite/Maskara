@@ -1,24 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://cmxrvqblubtcq"]
+[gd_scene load_steps=3 format=3 uid="uid://cmxrvqblubtcq"]
 
 [sub_resource type="Gradient" id="Gradient_1nfa1"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(0.89953744, 0.3058838, 0.13694745, 1)
+colors = PackedColorArray(0.9843137, 0.46666667, 0.3137255, 1, 1, 1, 1, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_rsyi2"]
-gradient = SubResource("Gradient_1nfa1")
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_axqjk"]
-size = Vector2(64, 64)
+[sub_resource type="Gradient" id="Gradient_rsyi2"]
+colors = PackedColorArray(0.88474226, 0.8275266, 1.92523e-06, 1, 1, 1, 1, 1)
 
 [node name="Fire" type="Area2D"]
-scale = Vector2(2, -0.128)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("GradientTexture2D_rsyi2")
-offset = Vector2(0, 29.72)
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 31.25)
-shape = SubResource("RectangleShape2D_axqjk")
-metadata/_edit_lock_ = true
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(0, -6.5)
+amount = 286
+lifetime = 0.51
+speed_scale = 0.55
+randomness = 0.59
+lifetime_randomness = 0.34
+emission_shape = 3
+emission_rect_extents = Vector2(50, 5.015)
+gravity = Vector2(0, -980)
+scale_amount_min = 0.0
+scale_amount_max = 10.0
+color = Color(1, 0.33333334, 0.14901961, 1)
+color_ramp = SubResource("Gradient_1nfa1")
+color_initial_ramp = SubResource("Gradient_rsyi2")

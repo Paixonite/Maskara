@@ -22,6 +22,7 @@ var attacking: bool = false
 var rng := RandomNumberGenerator.new()
 
 var lastHand
+var yFactor = 0;
 
 var difficultFactor = 1
 
@@ -31,26 +32,29 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if health <= totalHealth/2 and difficultFactor == 1:
-		print("hard mode")
-		difficultFactor += 2
+		$DamageHitbox/Sprite2D.texture = load("res://Sprites/anger_boss_body_second_phase.png")
+		difficultFactor = 2
 		
 	if target == null:
 		return
+	acc = (target.global_position - global_position).normalized() * speed
+	acc.x -= (global_position.x - get_parent().get_node("Right_Wall").position.x)
+	acc.x -= (global_position.x - get_parent().get_node("Left_Wall").position.x)
+	acc = acc.normalized() 
+	vel.x += acc.x * frictionFactor * delta * speed
+	vel.x = clampf(vel.x, -speedLimit, speedLimit)
+	$DamageHitbox.position.y += cos(yFactor)
+	position += vel * delta
+	
+	rotate(deg_to_rad(acc.x/100.0))
+	rotation_degrees = clampf(rotation_degrees, deg_to_rad(-180), deg_to_rad(180))
+	yFactor+=0.01
 	
 	if not attacking:
-		acc = (target.global_position - global_position).normalized() * speed
-		vel.x += acc.x * frictionFactor * delta
-		vel.x = clampf(vel.x, -speedLimit, speedLimit)
-		position += vel * delta
-		
-		rotate(deg_to_rad(acc.x/100.0))
-		rotation_degrees = clampf(rotation_degrees, deg_to_rad(-180), deg_to_rad(180))
-		
 		timer += delta
-		
-		if timer - aux < 0.5:
+		if floor(timer) - aux == 2/difficultFactor:
 			var attack = rng.randf_range(0, 1)
-			aux = timer
+			aux = floor(timer)
 			if attack < HAND:
 				if lastHand == 0 :
 					lastHand = 1
@@ -70,7 +74,7 @@ func _process(delta: float) -> void:
 		queue_free()
 
 func set_fire() :
-	var nPillars = rng.randi_range(5, 8)+difficultFactor
+	var nPillars = rng.randi_range(5, 8)*difficultFactor
 	var pillars = []
 	var fires = []
 	
@@ -86,10 +90,14 @@ func set_fire() :
 		
 	get_tree().create_timer(2).timeout.connect(func():
 		for i in range(0, nPillars) :
-			fires[i].queue_free()
 			pillars[i].position.x = fires[i].position.x
 			pillars[i].position.y = 560
 			get_parent().add_child(pillars[i])
+		)
+		
+	get_tree().create_timer(3).timeout.connect(func():
+		for i in range(0, nPillars) :
+			fires[i].queue_free()
 		)
 	
 func start_attack(arm: Node2D, target: Node2D) -> void:

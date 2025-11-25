@@ -12,13 +12,13 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	var parent = get_parent()
 	var target = parent.target
-	if not parent.attacking :
-		var v = target.global_position - self.global_position
-		var angle = v.angle()
-		if self == get_parent().get_child(2) :
-			angle += deg_to_rad(180)
-		var r = self.global_rotation
-		self.global_rotation = lerp_angle(r,angle,0.02)
+
+	var v = target.global_position - self.global_position
+	var angle = v.angle()
+	if self == get_parent().get_child(2) :
+		angle += deg_to_rad(180)
+	var r = self.global_rotation
+	self.global_rotation = lerp_angle(r,angle,0.02)
 
 func attack(target:Node2D) :
 	var tween = create_tween()

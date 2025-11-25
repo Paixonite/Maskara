@@ -3,7 +3,7 @@ extends Boss
 @export var target:Node2D
 @export var jump_height:float = -300
 @export var speed:float = 400
-@export var totalHealth:int = 50
+@export var totalHealth:float = 50
 var rng := RandomNumberGenerator.new()
 var vel:Vector2
 var attacking = false
@@ -14,10 +14,17 @@ var aux: int = 0
 const DISPERSE = 0
 const RAIN = 1
 
+var difficultFactor = 1
+
 func _ready() -> void:
 	health = totalHealth
 	
 func _physics_process(delta: float) -> void:
+	if health <= totalHealth/2 and difficultFactor == 1:
+		$Body/Sprite2D.texture = load("res://Sprites/fear_boss_second_phase.png")
+		$Hat/Sprite2D.texture = load("res://Sprites/fear_boss_hat_second_phase.png")
+		difficultFactor += 2
+		
 	if not attacking:
 		var acc = target.position-position 
 		acc = acc.normalized()
@@ -41,6 +48,6 @@ func attack() :
 	attacking = true
 
 	if attack == DISPERSE :
-		$Hat.disperse(target)
+		$Hat.disperse(target, difficultFactor)
 	elif attack == RAIN :
-		$Hat.rain(target)
+		$Hat.rain(target, difficultFactor)
