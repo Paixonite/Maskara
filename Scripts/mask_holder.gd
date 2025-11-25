@@ -16,3 +16,6 @@ func cycle() :
 	
 func addMask(mask) :
 	masks.append(mask)
+
+func has(mask) :
+	return masks.has(mask)

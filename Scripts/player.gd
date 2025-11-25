@@ -82,7 +82,11 @@ func _process(delta: float) -> void:
 			attackType = AttackType.PROJETIL
 			projectile_attack_cooldown = 0.6
 			damage = 3
+		if mask < 0 :
+			setSpriteTint(2, 2, 2)
+			$Pivot/Mask.texture = null
 	else :
+		setSpriteTint(2, 2, 2)
 		scale.y+=cos(a)/1000.0
 		a+=0.1
 	

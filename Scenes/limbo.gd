@@ -17,3 +17,14 @@ func _ready() -> void:
 	get_tree().create_timer(3).timeout.connect(func():
 		$Control.visible = false
 	)
+	
+	if MaskHolder.has(MaskHolder.Masks.ANGRY) :
+		$Anger_Door.queue_free();
+		$Control.visible = false
+	if MaskHolder.has(MaskHolder.Masks.FEAR) :
+		$Fear_Door.queue_free();
+		$Control.visible = false
+	if MaskHolder.has(MaskHolder.Masks.ANGRY) and MaskHolder.has(MaskHolder.Masks.FEAR) :
+		$Ego_Door.visible = true
+		$Ego_Door/CollisionShape2D.disabled = false
+		$Control.visible = false

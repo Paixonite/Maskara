@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bs07a8ghfr4jf"]
+[gd_scene load_steps=35 format=3 uid="uid://bs07a8ghfr4jf"]
 
 [ext_resource type="Script" uid="uid://byialel8k7081" path="res://Scenes/limbo.gd" id="1_gdu24"]
 [ext_resource type="PackedScene" uid="uid://byklja0xvswjw" path="res://Scenes/Instances/player.tscn" id="2_ryg17"]
@@ -8,10 +8,13 @@
 [ext_resource type="Script" uid="uid://dkxcusut33kmh" path="res://Scenes/anger_door.gd" id="6_xmhi4"]
 [ext_resource type="Texture2D" uid="uid://dfb3b4bmvclkd" path="res://Sprites/anger_door.png" id="7_4qrw5"]
 [ext_resource type="Script" uid="uid://c3bg1hxn1b55b" path="res://Scenes/fear_door.gd" id="7_8gyts"]
+[ext_resource type="Texture2D" uid="uid://clqkhdsf0e648" path="res://Sprites/W.png" id="8_jf8pu"]
 [ext_resource type="Texture2D" uid="uid://u8jb3wj3aipc" path="res://Sprites/fear_door.png" id="9_q76l4"]
 [ext_resource type="AudioStream" uid="uid://dnjc3f60nua2e" path="res://Sounds/Terraria Calamity Mod Music - _wasteland_ - Theme of The Sulphurous Sea [ASIPPu_LXmY].mp3" id="10_q76l4"]
+[ext_resource type="Script" uid="uid://c3btv7ijsjgjy" path="res://Scripts/w.gd" id="11_cbqor"]
 [ext_resource type="Shader" uid="uid://bp76guefuojvx" path="res://Shaders/refletion.gdshader" id="11_r4647"]
 [ext_resource type="Script" uid="uid://bxmdoblxbghk1" path="res://Scripts/reflection.gd" id="11_xfhat"]
+[ext_resource type="Script" uid="uid://3r4dv1fd25n5" path="res://Scenes/ego_door.gd" id="12_bnor2"]
 [ext_resource type="FontFile" uid="uid://d4cqk1e4cnqho" path="res://Fonts/KGLoveMolly.ttf" id="13_b4msk"]
 
 [sub_resource type="Gradient" id="Gradient_8gyts"]
@@ -37,6 +40,16 @@ size = Vector2(64.22421, 64.02116)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xmhi4"]
 size = Vector2(16.891062, 64.17186)
 
+[sub_resource type="Gradient" id="Gradient_cbqor"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bnor2"]
+gradient = SubResource("Gradient_cbqor")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r0bk7"]
+size = Vector2(63, 63)
+
 [sub_resource type="Gradient" id="Gradient_xq01f"]
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(0.05882353, 0.08627451, 0.1254902, 1)
@@ -58,9 +71,9 @@ shader = ExtResource("11_r4647")
 shader_parameter/CAST_COLOR = Color(0, 0, 0, 1)
 shader_parameter/fast_noise = SubResource("NoiseTexture2D_r4647")
 shader_parameter/speed = Vector2(0.03, 0.07)
-shader_parameter/wave_strength = 1.4
-shader_parameter/scale_y = 872.115
-shader_parameter/y_zoom = 1.1
+shader_parameter/wave_strength = 0.5
+shader_parameter/scale_y = 707.025
+shader_parameter/y_zoom = 0.82644624
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_q76l4"]
 
@@ -172,6 +185,14 @@ scale = Vector2(1.0000002, 1)
 shape = SubResource("RectangleShape2D_xmhi4")
 metadata/_edit_lock_ = true
 
+[node name="W" type="Sprite2D" parent="Anger_Door"]
+visible = false
+texture_filter = 1
+position = Vector2(-7.470643e-06, -37.454113)
+scale = Vector2(0.26560616, 0.26560616)
+texture = ExtResource("8_jf8pu")
+script = ExtResource("11_cbqor")
+
 [node name="Fear_Door" type="Area2D" parent="."]
 position = Vector2(526, 564)
 scale = Vector2(4.06, 4.06)
@@ -188,9 +209,40 @@ scale = Vector2(1.0000002, 1)
 shape = SubResource("RectangleShape2D_xmhi4")
 metadata/_edit_lock_ = true
 
+[node name="W" type="Sprite2D" parent="Fear_Door"]
+visible = false
+texture_filter = 1
+position = Vector2(1.4778324, -38.42365)
+scale = Vector2(0.24137987, 0.24137987)
+texture = ExtResource("8_jf8pu")
+script = ExtResource("11_cbqor")
+
+[node name="Ego_Door" type="Area2D" parent="."]
+visible = false
+position = Vector2(397.00003, 574)
+scale = Vector2(1.1723278, 3.7385528)
+script = ExtResource("12_bnor2")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ego_Door"]
+texture = SubResource("GradientTexture2D_bnor2")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ego_Door"]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_r0bk7")
+disabled = true
+metadata/_edit_lock_ = true
+
+[node name="W" type="Sprite2D" parent="Ego_Door"]
+texture_filter = 1
+position = Vector2(-3.4093857e-05, -38.51758)
+scale = Vector2(0.851, 0.263)
+texture = ExtResource("8_jf8pu")
+script = ExtResource("11_cbqor")
+
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -2
-position = Vector2(1, 34)
+position = Vector2(13, 95)
 scale = Vector2(68.905624, -73.12361)
 texture = SubResource("GradientTexture2D_4qrw5")
 
@@ -211,6 +263,7 @@ stream = ExtResource("10_q76l4")
 volume_db = -15.0
 
 [node name="Reflection" type="Sprite2D" parent="."]
+z_index = 10
 material = SubResource("ShaderMaterial_b4msk")
 position = Vector2(362.0001, 864.5)
 scale = Vector2(3294, 317)
