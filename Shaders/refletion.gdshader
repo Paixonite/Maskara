@@ -4,7 +4,7 @@ shader_type canvas_item;
 uniform vec4 CAST_COLOR : source_color;
  
 //get the underlying screen texture
-uniform sampler2D SCREEN_TEXTURE : hint_screen_texture;
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, repeat_disable, filter_nearest;
  
 //add a noise resource to inspector (for fast noise)
 uniform sampler2D fast_noise : repeat_enable;
