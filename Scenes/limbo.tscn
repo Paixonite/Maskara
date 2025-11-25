@@ -1,0 +1,213 @@
+[gd_scene load_steps=27 format=3 uid="uid://bs07a8ghfr4jf"]
+
+[ext_resource type="Script" uid="uid://byialel8k7081" path="res://Scenes/limbo.gd" id="1_gdu24"]
+[ext_resource type="PackedScene" uid="uid://byklja0xvswjw" path="res://Scenes/Instances/player.tscn" id="2_ryg17"]
+[ext_resource type="PackedScene" uid="uid://xfc33l6y6gxx" path="res://Scenes/Instances/camera_2d.tscn" id="3_6hdjc"]
+[ext_resource type="Script" uid="uid://b5krmu42sple1" path="res://Scenes/teleporter_0.gd" id="4_6hdjc"]
+[ext_resource type="Script" uid="uid://b8sumaqk3cyrd" path="res://Scenes/teleporter_1.gd" id="5_c70qu"]
+[ext_resource type="Script" uid="uid://dkxcusut33kmh" path="res://Scenes/anger_door.gd" id="6_xmhi4"]
+[ext_resource type="Texture2D" uid="uid://dfb3b4bmvclkd" path="res://Sprites/anger_door.png" id="7_4qrw5"]
+[ext_resource type="Script" uid="uid://c3bg1hxn1b55b" path="res://Scenes/fear_door.gd" id="7_8gyts"]
+[ext_resource type="Texture2D" uid="uid://u8jb3wj3aipc" path="res://Sprites/fear_door.png" id="9_q76l4"]
+[ext_resource type="AudioStream" uid="uid://dnjc3f60nua2e" path="res://Sounds/Terraria Calamity Mod Music - _wasteland_ - Theme of The Sulphurous Sea [ASIPPu_LXmY].mp3" id="10_q76l4"]
+[ext_resource type="Shader" uid="uid://bp76guefuojvx" path="res://Shaders/refletion.gdshader" id="11_r4647"]
+[ext_resource type="Script" uid="uid://bxmdoblxbghk1" path="res://Scripts/reflection.gd" id="11_xfhat"]
+
+[sub_resource type="Gradient" id="Gradient_8gyts"]
+offsets = PackedFloat32Array(0.013333334, 0.093333334)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ryg17"]
+gradient = SubResource("Gradient_8gyts")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6hdjc"]
+size = Vector2(64, 64)
+
+[sub_resource type="Gradient" id="Gradient_ryg17"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6hdjc"]
+gradient = SubResource("Gradient_ryg17")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c70qu"]
+size = Vector2(64.22421, 64.02116)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xmhi4"]
+size = Vector2(16.891062, 64.17186)
+
+[sub_resource type="Gradient" id="Gradient_xq01f"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.05882353, 0.08627451, 0.1254902, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4qrw5"]
+gradient = SubResource("Gradient_xq01f")
+
+[sub_resource type="Gradient" id="Gradient_4qrw5"]
+colors = PackedColorArray(1, 1, 1, 0.11764706, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_r4647"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_r4647"]
+noise = SubResource("FastNoiseLite_r4647")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b4msk"]
+shader = ExtResource("11_r4647")
+shader_parameter/CAST_COLOR = Color(0, 0, 0, 1)
+shader_parameter/fast_noise = SubResource("NoiseTexture2D_r4647")
+shader_parameter/speed = Vector2(0.03, 0.07)
+shader_parameter/wave_strength = 1.4
+shader_parameter/scale_y = 872.115
+shader_parameter/y_zoom = 0.35049382
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_q76l4"]
+
+[node name="Limbo" type="Node2D"]
+script = ExtResource("1_gdu24")
+player = ExtResource("2_ryg17")
+camera = ExtResource("3_6hdjc")
+
+[node name="Foreground" type="Node2D" parent="."]
+position = Vector2(244, 455)
+rotation = -3.1415925
+scale = Vector2(0.36000004, -0.36000004)
+
+[node name="Ground" type="StaticBody2D" parent="Foreground"]
+position = Vector2(-158.33345, 1530.5555)
+rotation = 3.1415927
+scale = Vector2(359.1216, 27.102549)
+
+[node name="Sprite2D" type="Sprite2D" parent="Foreground/Ground"]
+texture = SubResource("GradientTexture2D_ryg17")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Foreground/Ground"]
+shape = SubResource("RectangleShape2D_6hdjc")
+metadata/_edit_lock_ = true
+
+[node name="Ground2" type="StaticBody2D" parent="Foreground"]
+z_index = 1
+position = Vector2(-6738.888, 336.11005)
+rotation = 3.1415927
+scale = Vector2(112.66665, -78.333336)
+
+[node name="Sprite2D" type="Sprite2D" parent="Foreground/Ground2"]
+z_index = 2
+texture = SubResource("GradientTexture2D_ryg17")
+metadata/_edit_lock_ = true
+
+[node name="Ground3" type="StaticBody2D" parent="Foreground"]
+z_index = 1
+position = Vector2(5899.9995, 269.4453)
+scale = Vector2(112.66665, -78.333336)
+
+[node name="Sprite2D" type="Sprite2D" parent="Foreground/Ground3"]
+z_index = 2
+texture = SubResource("GradientTexture2D_ryg17")
+metadata/_edit_lock_ = true
+
+[node name="Ground4" type="StaticBody2D" parent="Foreground"]
+z_index = 1
+position = Vector2(-283.3326, -4708.3325)
+rotation = -1.5707964
+scale = Vector2(112.667, -140.788)
+
+[node name="Sprite2D" type="Sprite2D" parent="Foreground/Ground4"]
+z_index = 2
+texture = SubResource("GradientTexture2D_ryg17")
+metadata/_edit_lock_ = true
+
+[node name="Teleporter_0" type="Area2D" parent="Foreground"]
+position = Vector2(6005.5547, 469.4453)
+scale = Vector2(6.4444447, -20.999998)
+script = ExtResource("4_6hdjc")
+
+[node name="Sprite2D" type="Sprite2D" parent="Foreground/Teleporter_0"]
+texture = SubResource("GradientTexture2D_6hdjc")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Foreground/Teleporter_0"]
+position = Vector2(-0.21551514, 0)
+scale = Vector2(1, 1.0000002)
+shape = SubResource("RectangleShape2D_c70qu")
+metadata/_edit_lock_ = true
+
+[node name="Teleporter_1" type="Area2D" parent="Foreground"]
+position = Vector2(-7199.999, 513.88776)
+scale = Vector2(6.4444447, -20.999998)
+script = ExtResource("5_c70qu")
+
+[node name="Sprite2D" type="Sprite2D" parent="Foreground/Teleporter_1"]
+texture = SubResource("GradientTexture2D_6hdjc")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Foreground/Teleporter_1"]
+position = Vector2(-0.21551514, 0)
+scale = Vector2(1, 1.0000002)
+shape = SubResource("RectangleShape2D_c70qu")
+metadata/_edit_lock_ = true
+
+[node name="Coord" type="Node2D" parent="."]
+position = Vector2(397, 478)
+
+[node name="Anger_Door" type="Area2D" parent="."]
+position = Vector2(261.00003, 563.00006)
+scale = Vector2(4.085, 4.085)
+script = ExtResource("6_xmhi4")
+
+[node name="Sprite2D" type="Sprite2D" parent="Anger_Door"]
+texture_filter = 1
+texture = ExtResource("7_4qrw5")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Anger_Door"]
+position = Vector2(-0.36720657, 1.5258789e-05)
+scale = Vector2(1.0000002, 1)
+shape = SubResource("RectangleShape2D_xmhi4")
+metadata/_edit_lock_ = true
+
+[node name="Fear_Door" type="Area2D" parent="."]
+position = Vector2(526, 564)
+scale = Vector2(4.06, 4.06)
+script = ExtResource("7_8gyts")
+
+[node name="Sprite2D" type="Sprite2D" parent="Fear_Door"]
+texture_filter = 1
+texture = ExtResource("9_q76l4")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fear_Door"]
+position = Vector2(1.3113022e-06, 1.5258789e-05)
+scale = Vector2(1.0000002, 1)
+shape = SubResource("RectangleShape2D_xmhi4")
+metadata/_edit_lock_ = true
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(1, 34)
+scale = Vector2(68.905624, -73.12361)
+texture = SubResource("GradientTexture2D_4qrw5")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_index = -2
+position = Vector2(408, 775)
+amount = 13513
+lifetime = 259.24
+randomness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(1000.34, 1)
+gravity = Vector2(0, -980)
+scale_amount_max = 10.0
+color_initial_ramp = SubResource("Gradient_4qrw5")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_q76l4")
+volume_db = -15.0
+
+[node name="Reflection" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_b4msk")
+position = Vector2(362.0001, 864.5)
+scale = Vector2(3294, 317)
+texture = SubResource("CanvasTexture_q76l4")
+script = ExtResource("11_xfhat")

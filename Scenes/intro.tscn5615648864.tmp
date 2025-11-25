@@ -1,0 +1,247 @@
+[gd_scene load_steps=18 format=3 uid="uid://dqumeagr5s4db"]
+
+[ext_resource type="Script" uid="uid://qadhdtdy078d" path="res://Scenes/intro.gd" id="1_b226h"]
+[ext_resource type="PackedScene" uid="uid://byklja0xvswjw" path="res://Scenes/Instances/player.tscn" id="2_alxvg"]
+[ext_resource type="PackedScene" uid="uid://xfc33l6y6gxx" path="res://Scenes/Instances/camera_2d.tscn" id="3_geirw"]
+[ext_resource type="FontFile" uid="uid://d4cqk1e4cnqho" path="res://Fonts/KGLoveMolly.ttf" id="4_geirw"]
+[ext_resource type="AudioStream" uid="uid://df3lxijblfa6s" path="res://Sounds/Terraria Calamity Mod Music - _void_ - Theme of The Lower Abyss [6-kqGESk64w].mp3" id="5_hwjxs"]
+
+[sub_resource type="Gradient" id="Gradient_hw3f7"]
+offsets = PackedFloat32Array(0.013333334, 0.093333334)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_alxvg"]
+gradient = SubResource("Gradient_hw3f7")
+
+[sub_resource type="Gradient" id="Gradient_geirw"]
+colors = PackedColorArray(1, 1, 1, 0.2509804, 1, 1, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_alxvg"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.056871474, 0.08733296, 0.123973675, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_geirw"]
+gradient = SubResource("Gradient_alxvg")
+
+[sub_resource type="LabelSettings" id="LabelSettings_hwjxs"]
+font = ExtResource("4_geirw")
+font_size = 36
+font_color = Color(0.2, 0.8235294, 0.9490196, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_b26wi"]
+font = ExtResource("4_geirw")
+font_size = 36
+
+[sub_resource type="LabelSettings" id="LabelSettings_3bmuq"]
+font = ExtResource("4_geirw")
+font_size = 36
+font_color = Color(0.3529412, 0.003921569, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_nn7w8"]
+font = ExtResource("4_geirw")
+font_size = 36
+font_color = Color(1, 0.38431373, 0.16862746, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_geirw"]
+font = ExtResource("4_geirw")
+font_size = 36
+font_color = Color(1, 1, 0.49803922, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_rsiac"]
+font = ExtResource("4_geirw")
+font_size = 36
+font_color = Color(0.14370608, 0.37859076, 1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_geirw"]
+size = Vector2(20, 183)
+
+[node name="Intro" type="Node2D"]
+script = ExtResource("1_b226h")
+player = ExtResource("2_alxvg")
+camera = ExtResource("3_geirw")
+
+[node name="Ground2" type="StaticBody2D" parent="."]
+z_index = 1
+position = Vector2(789.99994, 7286)
+rotation = 1.5707964
+scale = Vector2(189.30667, -78.333336)
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground2"]
+z_index = 2
+texture = SubResource("GradientTexture2D_alxvg")
+metadata/_edit_lock_ = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_index = 2
+position = Vector2(565, 1324)
+amount = 18865
+lifetime = 600.0
+randomness = 0.73
+emission_shape = 3
+emission_rect_extents = Vector2(1000, 100)
+gravity = Vector2(0, -980)
+scale_amount_min = 5.0
+scale_amount_max = 20.0
+color_initial_ramp = SubResource("Gradient_geirw")
+hue_variation_min = -0.7
+hue_variation_max = 1.0
+
+[node name="Background" type="Sprite2D" parent="."]
+scale = Vector2(104.386955, -95.67205)
+texture = SubResource("GradientTexture2D_geirw")
+
+[node name="Mind" type="CPUParticles2D" parent="."]
+position = Vector2(600, 75)
+amount = 1
+lifetime = 0.54
+lifetime_randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 37.95
+gravity = Vector2(0, -980)
+angle_max = 180.0
+scale_amount_max = 3.4
+color = Color(0.2, 0.8235294, 0.9490196, 1)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Control3" type="Control" parent="Control"]
+visible = false
+anchors_preset = 0
+offset_left = -18.0
+offset_right = 22.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Control/Control3"]
+layout_mode = 0
+offset_left = 494.0
+offset_top = 139.0
+offset_right = 707.0
+offset_bottom = 177.0
+text = "Levanta-te, "
+label_settings = SubResource("LabelSettings_hwjxs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Control/Control3"]
+layout_mode = 0
+offset_left = 686.0
+offset_top = 140.0
+offset_right = 732.0
+offset_bottom = 178.0
+text = "Ego"
+label_settings = SubResource("LabelSettings_b26wi")
+
+[node name="Control2" type="Control" parent="Control"]
+visible = false
+anchors_preset = 0
+offset_left = 51.0
+offset_right = 91.0
+offset_bottom = 40.0
+
+[node name="Label2" type="Label" parent="Control/Control2"]
+layout_mode = 0
+offset_left = 251.0
+offset_top = 139.0
+offset_right = 965.0
+offset_bottom = 194.0
+text = "e              ameaçam o equilíbrio de nosso mundo"
+label_settings = SubResource("LabelSettings_hwjxs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="Control/Control2"]
+layout_mode = 0
+offset_left = 319.0
+offset_top = 147.0
+offset_right = 415.0
+offset_bottom = 185.0
+text = "Ignavo"
+label_settings = SubResource("LabelSettings_3bmuq")
+
+[node name="Label" type="Label" parent="Control/Control2"]
+layout_mode = 0
+offset_left = 205.0
+offset_top = 147.0
+offset_right = 285.0
+offset_bottom = 185.0
+text = "Cólera"
+label_settings = SubResource("LabelSettings_nn7w8")
+
+[node name="Label3" type="Label" parent="Control"]
+visible = false
+layout_mode = 0
+offset_left = 301.0
+offset_top = 139.0
+offset_right = 924.0
+offset_bottom = 194.0
+text = "Vá e derrote-os, absolva-os de seus pesares"
+label_settings = SubResource("LabelSettings_hwjxs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="Control"]
+visible = false
+anchors_preset = 0
+offset_left = -21.0
+offset_right = 19.0
+offset_bottom = 40.0
+
+[node name="Label4" type="Label" parent="Control/Control"]
+layout_mode = 0
+offset_left = 229.0
+offset_top = 139.0
+offset_right = 1011.0
+offset_bottom = 194.0
+text = "Leve a Máscara do           e a Máscara da                   consigo"
+label_settings = SubResource("LabelSettings_hwjxs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label5" type="Label" parent="Control/Control"]
+layout_mode = 0
+offset_left = 127.0
+offset_top = 139.0
+offset_right = 909.0
+offset_bottom = 194.0
+text = "Júbilo"
+label_settings = SubResource("LabelSettings_geirw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label6" type="Label" parent="Control/Control"]
+layout_mode = 0
+offset_left = 456.0
+offset_top = 139.0
+offset_right = 1238.0
+offset_bottom = 194.0
+text = "Melancolia"
+label_settings = SubResource("LabelSettings_rsiac")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="Control"]
+visible = false
+layout_mode = 0
+offset_left = 289.0
+offset_top = 139.0
+offset_right = 912.0
+offset_bottom = 194.0
+text = "Boa Sorte"
+label_settings = SubResource("LabelSettings_hwjxs")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Limbo" type="Area2D" parent="."]
+position = Vector2(909, 16244.001)
+scale = Vector2(-21521.738, 14.035246)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Limbo"]
+position = Vector2(0, 81.5)
+shape = SubResource("RectangleShape2D_geirw")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_hwjxs")

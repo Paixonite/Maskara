@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://b4yvbqot8cgit"]
+
+[ext_resource type="Script" uid="uid://pl7bw3xjhgsm" path="res://Scripts/fire_pillar.gd" id="1_xotv1"]
+[ext_resource type="AudioStream" uid="uid://csbfw4etnrlep" path="res://Sounds/dragon-breathes-fire-3-191459.mp3" id="2_sik43"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sik43"]
+size = Vector2(96, 493.1933)
+
+[sub_resource type="Gradient" id="Gradient_xotv1"]
+offsets = PackedFloat32Array(0, 0.49315068, 0.760274)
+colors = PackedColorArray(1, 0.36078432, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1)
+
+[node name="Fire_Pillar" type="Area2D"]
+script = ExtResource("1_xotv1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -246.40335)
+shape = SubResource("RectangleShape2D_sik43")
+metadata/_edit_lock_ = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(0, -14)
+amount = 4895
+lifetime = 9.2
+randomness = 0.37
+lifetime_randomness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(50, 14.12)
+gravity = Vector2(0, -980)
+scale_amount_max = 10.0
+color = Color(1, 0.33333334, 0.14901961, 1)
+color_ramp = SubResource("Gradient_xotv1")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_sik43")
+volume_db = -25.0

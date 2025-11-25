@@ -1,0 +1,189 @@
+[gd_scene load_steps=24 format=3 uid="uid://doodk4c2vmhft"]
+
+[ext_resource type="Script" uid="uid://8wu4hmga4bs6" path="res://Scenes/Bosses/Anger_Boss/anger_boss_main.gd" id="1_y8tsx"]
+[ext_resource type="PackedScene" uid="uid://byklja0xvswjw" path="res://Scenes/Instances/player.tscn" id="2_womh2"]
+[ext_resource type="PackedScene" uid="uid://xfc33l6y6gxx" path="res://Scenes/Instances/camera_2d.tscn" id="3_3767i"]
+[ext_resource type="PackedScene" uid="uid://b4yvbqot8cgit" path="res://Scenes/Instances/fire_pillar.tscn" id="5_3767i"]
+[ext_resource type="PackedScene" uid="uid://cmxrvqblubtcq" path="res://Scenes/Instances/fire.tscn" id="6_f61l0"]
+[ext_resource type="Script" uid="uid://drriyb88n13v6" path="res://Scenes/Bosses/Anger_Boss/anger_attack.gd" id="9_6bf3w"]
+[ext_resource type="Texture2D" uid="uid://ckb3g54jeb2kj" path="res://Sprites/anger_boss_body.png" id="10_8aasb"]
+[ext_resource type="Texture2D" uid="uid://fa6bqf1ppv6" path="res://Sprites/hand_anger.png" id="12_biar6"]
+[ext_resource type="AudioStream" uid="uid://ww22pgi6q82t" path="res://Sounds/explosion-312361.mp3" id="12_hw3f7"]
+[ext_resource type="Script" uid="uid://dig64xr3y0rcw" path="res://Scenes/Bosses/Anger_Boss/anger_boss.gd" id="12_oykgf"]
+[ext_resource type="AudioStream" uid="uid://cu4teb1cfd3uy" path="res://Sounds/Terraria Calamity Mod Music - _Unholy Insurgency_ - Theme of Providence, The Profaned God [6Q57JfIz2Mg].mp3" id="12_wm2br"]
+[ext_resource type="AudioStream" uid="uid://cvsw68ddh8xhh" path="res://Sounds/monster-roar_mixdown2-99874.mp3" id="13_d2gee"]
+[ext_resource type="Script" uid="uid://bi251fhfy5shg" path="res://Scenes/Bosses/Anger_Boss/damage_hitbox.gd" id="15_ai084"]
+[ext_resource type="Shader" uid="uid://5upu7klafshg" path="res://Shaders/flash.gdshader" id="15_cktsn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y8tsx"]
+shader = ExtResource("15_cktsn")
+shader_parameter/color = Vector4(1, 1, 1, 1)
+shader_parameter/flashState = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oykgf"]
+size = Vector2(144.64206, 126.219574)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6bf3w"]
+size = Vector2(85.05469, 96.408554)
+
+[sub_resource type="Gradient" id="Gradient_f61l0"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.10755219, 0.14650479, 0.20215207, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_biar6"]
+gradient = SubResource("Gradient_f61l0")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jlm4f"]
+size = Vector2(64, 64)
+
+[sub_resource type="Gradient" id="Gradient_d2gee"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.6712329)
+colors = PackedColorArray(0.7921569, 0.3647059, 0, 0.3372549, 1, 1, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_oykgf"]
+offsets = PackedFloat32Array(0, 0.35333332)
+colors = PackedColorArray(1, 0.27058825, 0, 1, 0.05882353, 0.08627451, 0.1254902, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_44c7c"]
+gradient = SubResource("Gradient_oykgf")
+
+[node name="AngerBoss" type="Node2D" groups=["enemy"]]
+position = Vector2(-2, 0)
+script = ExtResource("1_y8tsx")
+player = ExtResource("2_womh2")
+camera = ExtResource("3_3767i")
+
+[node name="Anger_Boss" type="Area2D" parent="."]
+position = Vector2(419, 362)
+scale = Vector2(0.78772837, 0.70533174)
+script = ExtResource("12_oykgf")
+firePillars = ExtResource("5_3767i")
+fire = ExtResource("6_f61l0")
+
+[node name="DamageHitbox" type="Area2D" parent="Anger_Boss"]
+position = Vector2(-1.2694732, -82.230804)
+script = ExtResource("15_ai084")
+
+[node name="Sprite2D" type="Sprite2D" parent="Anger_Boss/DamageHitbox"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_y8tsx")
+position = Vector2(-2.861023e-06, 38.279846)
+scale = Vector2(5.7400002, 5.7400002)
+texture = ExtResource("10_8aasb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Anger_Boss/DamageHitbox"]
+shape = SubResource("RectangleShape2D_oykgf")
+metadata/_edit_lock_ = true
+
+[node name="Left" type="Area2D" parent="Anger_Boss"]
+position = Vector2(-322.44617, 38.279858)
+scale = Vector2(2, 2)
+script = ExtResource("9_6bf3w")
+
+[node name="Left_Hand" type="Sprite2D" parent="Anger_Boss/Left"]
+texture_filter = 1
+scale = Vector2(3.56, 3.56)
+texture = ExtResource("12_biar6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Anger_Boss/Left"]
+position = Vector2(0.6347351, -31.190918)
+shape = SubResource("RectangleShape2D_6bf3w")
+
+[node name="Right" type="Area2D" parent="Anger_Boss"]
+position = Vector2(327.52408, 39.697636)
+scale = Vector2(2, 2)
+script = ExtResource("9_6bf3w")
+
+[node name="Right_Hand" type="Sprite2D" parent="Anger_Boss/Right"]
+texture_filter = 1
+scale = Vector2(-3.535, 3.535)
+texture = ExtResource("12_biar6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Anger_Boss/Right"]
+position = Vector2(-1.2694702, -29.773254)
+shape = SubResource("RectangleShape2D_6bf3w")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Anger_Boss"]
+stream = ExtResource("12_hw3f7")
+
+[node name="Roar" type="AudioStreamPlayer" parent="Anger_Boss"]
+stream = ExtResource("13_d2gee")
+volume_db = -10.0
+
+[node name="Foreground" type="Node2D" parent="."]
+position = Vector2(244, 455)
+rotation = -3.1415925
+scale = Vector2(0.36000004, -0.36000004)
+
+[node name="Ground" type="StaticBody2D" parent="Foreground"]
+position = Vector2(-158.33345, 1530.5555)
+rotation = 3.1415927
+scale = Vector2(112.66665, -38.999996)
+
+[node name="Sprite2D" type="Sprite2D" parent="Foreground/Ground"]
+texture = SubResource("GradientTexture2D_biar6")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Foreground/Ground"]
+shape = SubResource("RectangleShape2D_jlm4f")
+metadata/_edit_lock_ = true
+
+[node name="Ground2" type="StaticBody2D" parent="Foreground"]
+position = Vector2(-4861.1104, 372.2218)
+rotation = 1.5707964
+scale = Vector2(112.66665, -78.333336)
+
+[node name="Sprite2D" type="Sprite2D" parent="Foreground/Ground2"]
+texture = SubResource("GradientTexture2D_biar6")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Foreground/Ground2"]
+shape = SubResource("RectangleShape2D_jlm4f")
+metadata/_edit_lock_ = true
+
+[node name="Ground3" type="StaticBody2D" parent="Foreground"]
+position = Vector2(3911.1106, 566.6669)
+rotation = 1.5707964
+scale = Vector2(112.66665, -78.333336)
+
+[node name="Sprite2D" type="Sprite2D" parent="Foreground/Ground3"]
+texture = SubResource("GradientTexture2D_biar6")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Foreground/Ground3"]
+shape = SubResource("RectangleShape2D_jlm4f")
+metadata/_edit_lock_ = true
+
+[node name="Coord" type="Node2D" parent="."]
+position = Vector2(1091, 557)
+
+[node name="Right_Wall" type="Node2D" parent="."]
+position = Vector2(1092, 353)
+
+[node name="Left_Wall" type="Node2D" parent="."]
+position = Vector2(-262, 343)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_wm2br")
+volume_db = -20.0
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_index = -2
+position = Vector2(442, 654)
+amount = 500
+lifetime = 69.05000000000001
+emission_shape = 3
+emission_rect_extents = Vector2(1000, 1)
+gravity = Vector2(0, -580)
+scale_amount_min = 10.0
+scale_amount_max = 20.0
+color = Color(1, 0.3764706, 0, 1)
+color_initial_ramp = SubResource("Gradient_d2gee")
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -3
+position = Vector2(394.99997, -5.0000005)
+rotation = -1.5707964
+scale = Vector2(26.6, 21.720001)
+texture = SubResource("GradientTexture2D_44c7c")
