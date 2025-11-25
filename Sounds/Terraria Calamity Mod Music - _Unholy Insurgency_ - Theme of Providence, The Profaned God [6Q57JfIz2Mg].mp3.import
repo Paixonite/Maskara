@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cu4teb1cfd3uy"
+path="res://.godot/imported/Terraria Calamity Mod Music - _Unholy Insurgency_ - Theme of Providence, The Profaned God [6Q57JfIz2Mg].mp3-78df02da314dbfa8365545f711ec6f6a.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Terraria Calamity Mod Music - _Unholy Insurgency_ - Theme of Providence, The Profaned God [6Q57JfIz2Mg].mp3"
+dest_files=["res://.godot/imported/Terraria Calamity Mod Music - _Unholy Insurgency_ - Theme of Providence, The Profaned God [6Q57JfIz2Mg].mp3-78df02da314dbfa8365545f711ec6f6a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
