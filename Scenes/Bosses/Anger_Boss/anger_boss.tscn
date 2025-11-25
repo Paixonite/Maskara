@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://doodk4c2vmhft"]
+[gd_scene load_steps=27 format=3 uid="uid://doodk4c2vmhft"]
 
 [ext_resource type="Script" uid="uid://8wu4hmga4bs6" path="res://Scenes/Bosses/Anger_Boss/anger_boss_main.gd" id="1_y8tsx"]
 [ext_resource type="PackedScene" uid="uid://byklja0xvswjw" path="res://Scenes/Instances/player.tscn" id="2_womh2"]
@@ -12,8 +12,10 @@
 [ext_resource type="Script" uid="uid://dig64xr3y0rcw" path="res://Scenes/Bosses/Anger_Boss/anger_boss.gd" id="12_oykgf"]
 [ext_resource type="AudioStream" uid="uid://cu4teb1cfd3uy" path="res://Sounds/Terraria Calamity Mod Music - _Unholy Insurgency_ - Theme of Providence, The Profaned God [6Q57JfIz2Mg].mp3" id="12_wm2br"]
 [ext_resource type="AudioStream" uid="uid://cvsw68ddh8xhh" path="res://Sounds/monster-roar_mixdown2-99874.mp3" id="13_d2gee"]
+[ext_resource type="Script" uid="uid://bkqvstbjqoufg" path="res://Scenes/Bosses/Anger_Boss/anger_mask.gd" id="14_44c7c"]
 [ext_resource type="Script" uid="uid://bi251fhfy5shg" path="res://Scenes/Bosses/Anger_Boss/damage_hitbox.gd" id="15_ai084"]
 [ext_resource type="Shader" uid="uid://5upu7klafshg" path="res://Shaders/flash.gdshader" id="15_cktsn"]
+[ext_resource type="Texture2D" uid="uid://fjtqdcfpbe0" path="res://Sprites/Masks/angry.png" id="15_y8tsx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y8tsx"]
 shader = ExtResource("15_cktsn")
@@ -47,6 +49,8 @@ colors = PackedColorArray(1, 0.27058825, 0, 1, 0.05882353, 0.08627451, 0.1254902
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_44c7c"]
 gradient = SubResource("Gradient_oykgf")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_44c7c"]
 
 [node name="AngerBoss" type="Node2D" groups=["enemy"]]
 position = Vector2(-2, 0)
@@ -110,6 +114,19 @@ stream = ExtResource("12_hw3f7")
 [node name="Roar" type="AudioStreamPlayer" parent="Anger_Boss"]
 stream = ExtResource("13_d2gee")
 volume_db = -10.0
+
+[node name="Death" type="CPUParticles2D" parent="Anger_Boss"]
+z_index = -2
+position = Vector2(-1.2694732, 55.293133)
+emitting = false
+amount = 438
+emission_shape = 1
+emission_sphere_radius = 128.0
+orbit_velocity_min = -1.0
+orbit_velocity_max = 1.0
+scale_amount_min = 5.0
+scale_amount_max = 10.0
+color = Color(1, 0.3254902, 0, 1)
 
 [node name="Foreground" type="Node2D" parent="."]
 position = Vector2(244, 455)
@@ -187,3 +204,33 @@ position = Vector2(394.99997, -5.0000005)
 rotation = -1.5707964
 scale = Vector2(26.6, 21.720001)
 texture = SubResource("GradientTexture2D_44c7c")
+
+[node name="Mask" type="Area2D" parent="."]
+z_index = -1
+position = Vector2(403.00003, 405)
+scale = Vector2(3.7857985, 3.389803)
+script = ExtResource("14_44c7c")
+
+[node name="Sprite2D" type="Sprite2D" parent="Mask"]
+visible = false
+texture_filter = 1
+position = Vector2(-7.6602154, 1.7700148)
+texture = ExtResource("15_y8tsx")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Mask"]
+z_index = -2
+emitting = false
+amount = 1000
+lifetime = 5.41
+emission_shape = 1
+emission_sphere_radius = 7.6
+angular_velocity_min = -1.0
+angular_velocity_max = 1.0
+orbit_velocity_min = -1.0
+orbit_velocity_max = 1.0
+scale_amount_min = 2.0
+scale_amount_max = 8.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mask"]
+shape = SubResource("CircleShape2D_44c7c")
+disabled = true

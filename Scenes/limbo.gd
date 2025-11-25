@@ -14,3 +14,6 @@ func _ready() -> void:
 	c.get_child(0).health = p.healthManager
 	
 	$AudioStreamPlayer.play()
+	get_tree().create_timer(3).timeout.connect(func():
+		$Control.visible = false
+	)

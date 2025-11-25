@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://s264ksnh8w18"]
+[gd_scene load_steps=26 format=3 uid="uid://s264ksnh8w18"]
 
 [ext_resource type="Script" uid="uid://8da747e0mim4" path="res://Scenes/Bosses/Fear_Boss/fear_boss_main.gd" id="1_kqa3a"]
 [ext_resource type="PackedScene" uid="uid://byklja0xvswjw" path="res://Scenes/Instances/player.tscn" id="2_c8i1p"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" uid="uid://cfk1mfgnwu7th" path="res://Scenes/Bosses/Fear_Boss/fear_boss.gd" id="12_nh0no"]
 [ext_resource type="Texture2D" uid="uid://ty0e5ws6cgy5" path="res://Sprites/fear_boss.png" id="13_0a4ef"]
 [ext_resource type="Script" uid="uid://djltdutdglfov" path="res://Scenes/Bosses/Fear_Boss/head.gd" id="13_6cg8m"]
+[ext_resource type="Script" uid="uid://ccxc5o1lctvya" path="res://Scenes/Bosses/Fear_Boss/fear_mask.gd" id="13_yqhjx"]
+[ext_resource type="Texture2D" uid="uid://6sabkr06ap5r" path="res://Sprites/Masks/fear.png" id="14_xh1yx"]
 [ext_resource type="Texture2D" uid="uid://dt80nfjyk0coc" path="res://Sprites/fear_boss_hat.png" id="14_yqhjx"]
 [ext_resource type="PackedScene" uid="uid://ddwwr37r2obqg" path="res://Scenes/Instances/pit_ball.tscn" id="15_jyq6w"]
 [ext_resource type="Shader" uid="uid://5upu7klafshg" path="res://Shaders/flash.gdshader" id="17_vivgl"]
@@ -20,6 +22,11 @@ shader_parameter/flashState = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jyq6w"]
 size = Vector2(67.5, 34.42308)
+
+[sub_resource type="Gradient" id="Gradient_0a4ef"]
+
+[sub_resource type="Gradient" id="Gradient_yqhjx"]
+colors = PackedColorArray(0.427493, 0.42749307, 0.42749307, 1, 1, 1, 1, 1)
 
 [sub_resource type="Gradient" id="Gradient_0er1k"]
 offsets = PackedFloat32Array(1)
@@ -40,6 +47,8 @@ gradient = SubResource("Gradient_oykgf")
 
 [sub_resource type="Gradient" id="Gradient_nh0no"]
 colors = PackedColorArray(1, 1, 1, 0.078431375, 1, 1, 1, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jyq6w"]
 
 [node name="FearBoss" type="Node2D"]
 script = ExtResource("1_kqa3a")
@@ -82,6 +91,34 @@ volume_db = -5.0
 
 [node name="Roar" type="AudioStreamPlayer" parent="Fear_Boss"]
 stream = ExtResource("11_nh0no")
+
+[node name="Aura" type="CPUParticles2D" parent="Fear_Boss"]
+z_index = -1
+amount = 328
+lifetime = 231.25
+emission_shape = 1
+emission_sphere_radius = 39.05
+gravity = Vector2(0, 0)
+orbit_velocity_min = -0.5
+orbit_velocity_max = 0.5
+scale_amount_min = 5.0
+scale_amount_max = 15.0
+color = Color(0.5372549, 0, 1, 1)
+color_initial_ramp = SubResource("Gradient_0a4ef")
+
+[node name="Death" type="CPUParticles2D" parent="Fear_Boss"]
+z_index = -2
+position = Vector2(-6.1035153e-06, 11.4)
+emitting = false
+amount = 100
+emission_shape = 1
+emission_sphere_radius = 36.6
+orbit_velocity_min = -0.2
+orbit_velocity_max = 0.2
+scale_amount_min = 15.0
+scale_amount_max = 30.0
+color = Color(0.59607846, 0, 1, 1)
+color_initial_ramp = SubResource("Gradient_yqhjx")
 
 [node name="Foreground" type="Node2D" parent="."]
 
@@ -157,3 +194,34 @@ color_initial_ramp = SubResource("Gradient_nh0no")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_aum8m")
 volume_db = -15.0
+
+[node name="Mask" type="Area2D" parent="."]
+visible = false
+z_index = -1
+position = Vector2(403.00003, 107.99994)
+scale = Vector2(3.7857985, 3.389803)
+script = ExtResource("13_yqhjx")
+
+[node name="Sprite2D" type="Sprite2D" parent="Mask"]
+visible = false
+texture_filter = 1
+position = Vector2(-7.6602154, 1.7700148)
+texture = ExtResource("14_xh1yx")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Mask"]
+z_index = -2
+emitting = false
+amount = 1000
+lifetime = 5.41
+emission_shape = 1
+emission_sphere_radius = 7.6
+angular_velocity_min = -1.0
+angular_velocity_max = 1.0
+orbit_velocity_min = -1.0
+orbit_velocity_max = 1.0
+scale_amount_min = 2.0
+scale_amount_max = 8.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mask"]
+shape = SubResource("CircleShape2D_jyq6w")
+disabled = true

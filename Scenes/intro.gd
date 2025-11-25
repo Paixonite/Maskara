@@ -6,9 +6,12 @@ var timer = 0
 
 func _ready() -> void:
 	var p = player.instantiate()
+	p.get_node("Pivot").get_node("Falling").visible = true
+	
 	p.position = Vector2(600, 300)
 	p.unmasked = true
 	add_child(p)
+	p.setSpriteTint(3, 3, 3)
 	
 	var c = camera.instantiate()
 	add_child(c)

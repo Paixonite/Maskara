@@ -19,7 +19,7 @@ var acc = Vector2(0, 0)
 var difficultFactor = 1
 
 func _ready() -> void:
-	health = totalHealth
+	health = 2
 	
 func _physics_process(delta: float) -> void:
 	if health <= totalHealth/2 and difficultFactor == 1:
@@ -30,20 +30,45 @@ func _physics_process(delta: float) -> void:
 		camera_to_shake.start_shake()
 		attacking = false
 		
-	#if not attacking:
-	acc.x += target.position.x-position.x 
-	acc = acc.normalized()
-	vel += acc
-	vel *= 0.9
-	position += vel*difficultFactor
-	rotate(deg_to_rad(acc.x/5.0))
-	rotation_degrees = clampf(rotation_degrees, deg_to_rad(-180), deg_to_rad(180))
-		
+	if not attacking:
+		acc.x += target.position.x-position.x 
+		acc = acc.normalized()
+		vel += acc
+		vel *= 0.9
+		position += vel*difficultFactor
+		rotate(deg_to_rad(acc.x/5.0))
+		rotation_degrees = clampf(rotation_degrees, deg_to_rad(-180), deg_to_rad(180))
+	
+	position.y+=vel.y
+	
 	timer += delta
 	if floor(timer) - aux == 1.0:
 		aux = floor(timer)
 		if int(fmod(timer, 1.0)) == 0:
 			attack()
+		
+	if health <= 0 :
+		if not $Roar.playing and !get_parent().get_node("Mask").visible:
+			$Roar.play()
+		$Death.emitting = true
+		camera_to_shake.start_shake()
+		attacking = true
+		$Hat.damageableActive = false
+		
+		get_tree().create_timer(2).timeout.connect(func():
+			vel.y = 10
+		)
+		
+		get_parent().get_node("Mask").visible = true
+		
+		get_tree().create_timer(6).timeout.connect(func():
+			get_parent().get_node("Mask").get_node("Sprite2D").visible = true
+			get_parent().get_node("Mask").get_node("CollisionShape2D").disabled = false
+			queue_free()
+		)
+		get_tree().create_timer(4).timeout.connect(func():
+			get_parent().get_node("Mask").get_node("CPUParticles2D").emitting = true
+		)
 		
 func attack() :
 	if attacking :

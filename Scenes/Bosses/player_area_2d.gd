@@ -9,9 +9,13 @@ func _process(delta: float) -> void:
 				#print("porta")
 				get_tree().change_scene_to_file(lastAreaEntereded.scene)
 				
-		if lastAreaEntereded is Damage :
+		if lastAreaEntereded is Damage and lastAreaEntereded.damageActive and !get_parent().healthManager.cooldown:
 			$AudioStreamPlayer.play()
 			get_parent().healthManager.damage(1)
+		
+		if lastAreaEntereded is Mask :
+			MaskHolder.addMask(lastAreaEntereded.mask_value)
+			get_tree().change_scene_to_file("res://Scenes/limbo.tscn")
 
 func _on_area_entered(area: Area2D) -> void:
 	lastAreaEntereded = area

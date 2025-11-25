@@ -3,6 +3,7 @@ extends CharacterBody2D
 @export var animations:AnimationPlayer
 @export var animationAttack:AnimationPlayer
 @export var healthManager:Node2D
+@export var maskHolder:Script
 @export var projectile_scene: PackedScene
 @export var SPEED = 500.0
 @export var JUMP_VELOCITY_STEP = 30
@@ -11,7 +12,7 @@ extends CharacterBody2D
 @export var gravityFactor = 0.9
 
 enum Masks { HAPPY, SAD, ANGRY, SURPRISE, FEAR, LOVE }
-@export var mask : Masks
+var mask
 
 var acceleration
 var jump_power_initial = -600
@@ -33,10 +34,11 @@ var attackType
 
 var unmasked = false
 var a = 0
-
+	
 func _process(delta: float) -> void:
-	setSpriteTint(1, 1, 1)
 	if not unmasked :
+		setSpriteTint(1, 1, 1)
+		mask = MaskHolder.currentMask
 		$Pivot/Mask.visible = true
 		if mask == Masks.HAPPY :
 			$Pivot/Mask.texture = load("res://Sprites/Masks/happy.png")
@@ -57,7 +59,7 @@ func _process(delta: float) -> void:
 			setSpriteTint(2, 0.3, 0)
 			SPEED = 600
 			attackType = AttackType.FISICO
-			physical_attack_cooldown = 0.4
+			physical_attack_cooldown = 0.6
 			damage = 2
 		if mask == Masks.SURPRISE :
 			$Pivot/Mask.texture = load("res://Sprites/Masks/surprise.png")
@@ -104,7 +106,9 @@ func _physics_process(delta: float) -> void:
 		match attackType:
 			AttackType.FISICO: _do_attack_fisico()
 			AttackType.PROJETIL: _do_attack_projetil()
-		
+	
+	if Input.is_action_just_pressed("switch") :
+		MaskHolder.cycle()
 	if healthManager.currentHealth <= 0 :
 		get_tree().change_scene_to_file("res://Scenes/limbo.tscn")
 

@@ -5,7 +5,7 @@ extends Boss
 @export var frictionFactor: float = 0.9
 @export var speed: float = 100.0
 @export var speedLimit: float = 400.0
-@export var totalHealth: int = 60
+@export var totalHealth: int = 100
 @export var firePillars:PackedScene
 @export var fire:PackedScene
 
@@ -24,10 +24,12 @@ var rng := RandomNumberGenerator.new()
 var lastHand
 var yFactor = 0;
 
+
+
 var difficultFactor = 1
 
 func _ready() -> void:
-	health = totalHealth
+	health = 2
 	lastHand = rng.randi_range(0, 1)
 
 func _process(delta: float) -> void:
@@ -73,10 +75,26 @@ func _process(delta: float) -> void:
 		
 	
 	if health <= 0 :
+		if not $Roar.playing :
+			$Roar.play()
+		$Death.emitting = true
 		camera_to_shake.start_shake()
 		attacking = true
-		get_tree().create_timer(2).timeout.connect(func():
+		$Left.damageActive = false
+		$Right.damageActive = false
+		$DamageHitbox.damageableActive = false
+		get_tree().create_timer(6).timeout.connect(func():
+			vel.y += 10
+		)
+		get_parent().get_node("Mask").visible = true
+		
+		get_tree().create_timer(8).timeout.connect(func():
+			get_parent().get_node("Mask").get_node("Sprite2D").visible = true
+			get_parent().get_node("Mask").get_node("CollisionShape2D").disabled = false
 			queue_free()
+		)
+		get_tree().create_timer(7).timeout.connect(func():
+			get_parent().get_node("Mask").get_node("CPUParticles2D").emitting = true
 		)
 
 func set_fire() :

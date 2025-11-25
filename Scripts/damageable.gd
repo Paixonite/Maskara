@@ -1,5 +1,7 @@
 class_name Damageable extends Area2D
 
+var damageableActive = true
+
 func _process(delta: float) -> void:
 	var material = $Sprite2D.material
 	material.set_shader_parameter("flashState", lerpf(material.get_shader_parameter("flashState"), 0, 0.1))

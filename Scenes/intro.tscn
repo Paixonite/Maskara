@@ -87,6 +87,7 @@ hue_variation_min = -0.7
 hue_variation_max = 1.0
 
 [node name="Background" type="Sprite2D" parent="."]
+z_index = -1
 scale = Vector2(104.386955, -95.67205)
 texture = SubResource("GradientTexture2D_geirw")
 
@@ -111,27 +112,27 @@ offset_bottom = 40.0
 [node name="Control3" type="Control" parent="Control"]
 visible = false
 anchors_preset = 0
-offset_left = -18.0
+offset_left = 13.0
 offset_top = 8.0
-offset_right = 22.0
+offset_right = 53.0
 offset_bottom = 48.0
 
 [node name="Label" type="Label" parent="Control/Control3"]
 layout_mode = 0
-offset_left = 494.0
+offset_left = 453.0
 offset_top = 139.0
-offset_right = 707.0
+offset_right = 666.0
 offset_bottom = 177.0
-text = "Levanta-te, "
+text = "Acorde, "
 label_settings = SubResource("LabelSettings_hwjxs")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="Control/Control3"]
 layout_mode = 0
-offset_left = 686.0
+offset_left = 617.0
 offset_top = 140.0
-offset_right = 732.0
+offset_right = 663.0
 offset_bottom = 178.0
 text = "Ego"
 label_settings = SubResource("LabelSettings_b26wi")
@@ -187,8 +188,8 @@ vertical_alignment = 1
 [node name="Control" type="Control" parent="Control"]
 visible = false
 anchors_preset = 0
-offset_left = -21.0
-offset_right = 19.0
+offset_left = 167.0
+offset_right = 207.0
 offset_bottom = 40.0
 
 [node name="Label4" type="Label" parent="Control/Control"]
@@ -197,16 +198,15 @@ offset_left = 229.0
 offset_top = 139.0
 offset_right = 1011.0
 offset_bottom = 194.0
-text = "Leve a Máscara do           e a Máscara da                   contigo"
+text = "Leve           e                   contigo"
 label_settings = SubResource("LabelSettings_hwjxs")
-horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label5" type="Label" parent="Control/Control"]
 layout_mode = 0
-offset_left = 127.0
+offset_left = -58.0
 offset_top = 139.0
-offset_right = 909.0
+offset_right = 724.0
 offset_bottom = 194.0
 text = "Júbilo"
 label_settings = SubResource("LabelSettings_geirw")
@@ -215,10 +215,10 @@ vertical_alignment = 1
 
 [node name="Label6" type="Label" parent="Control/Control"]
 layout_mode = 0
-offset_left = 456.0
-offset_top = 139.0
-offset_right = 1238.0
-offset_bottom = 194.0
+offset_left = 78.0
+offset_top = 140.0
+offset_right = 860.0
+offset_bottom = 195.0
 text = "Melancolia"
 label_settings = SubResource("LabelSettings_rsiac")
 horizontal_alignment = 1

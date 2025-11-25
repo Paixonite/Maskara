@@ -24,8 +24,8 @@ func _process(delta: float) -> void:
 	else :
 		a = 0
 		player.setSpriteTintVector(originalTint)
-		material_Walk.set_shader_parameter("intensity", lerpf(material_Walk.get_shader_parameter("intensity"), 0.15, 0.2))	
-		material_Idle.set_shader_parameter("intensity", lerpf(material_Idle.get_shader_parameter("intensity"), 0.15, 0.2))	
+		material_Walk.set_shader_parameter("intensity", lerpf(material_Walk.get_shader_parameter("intensity"), 1, 0.2))	
+		material_Idle.set_shader_parameter("intensity", lerpf(material_Idle.get_shader_parameter("intensity"), 1, 0.2))	
 
 func damage(amount : int) :
 	var player = get_parent()
@@ -44,7 +44,7 @@ func damage(amount : int) :
 	cooldown = false
 	
 	player.setSpriteTintVector(originalTint)
-	material_Walk.set_shader_parameter("intensity", 0.15)	
-	material_Idle.set_shader_parameter("intensity", 0.15)	
+	material_Walk.set_shader_parameter("intensity", 1)	
+	material_Idle.set_shader_parameter("intensity", 1)	
 func heal (amount : int) :
 	currentHealth+=amount

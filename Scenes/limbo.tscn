@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bs07a8ghfr4jf"]
+[gd_scene load_steps=29 format=3 uid="uid://bs07a8ghfr4jf"]
 
 [ext_resource type="Script" uid="uid://byialel8k7081" path="res://Scenes/limbo.gd" id="1_gdu24"]
 [ext_resource type="PackedScene" uid="uid://byklja0xvswjw" path="res://Scenes/Instances/player.tscn" id="2_ryg17"]
@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://dnjc3f60nua2e" path="res://Sounds/Terraria Calamity Mod Music - _wasteland_ - Theme of The Sulphurous Sea [ASIPPu_LXmY].mp3" id="10_q76l4"]
 [ext_resource type="Shader" uid="uid://bp76guefuojvx" path="res://Shaders/refletion.gdshader" id="11_r4647"]
 [ext_resource type="Script" uid="uid://bxmdoblxbghk1" path="res://Scripts/reflection.gd" id="11_xfhat"]
+[ext_resource type="FontFile" uid="uid://d4cqk1e4cnqho" path="res://Fonts/KGLoveMolly.ttf" id="13_b4msk"]
 
 [sub_resource type="Gradient" id="Gradient_8gyts"]
 offsets = PackedFloat32Array(0.013333334, 0.093333334)
@@ -59,9 +60,13 @@ shader_parameter/fast_noise = SubResource("NoiseTexture2D_r4647")
 shader_parameter/speed = Vector2(0.03, 0.07)
 shader_parameter/wave_strength = 1.4
 shader_parameter/scale_y = 872.115
-shader_parameter/y_zoom = 0.35049382
+shader_parameter/y_zoom = 1.1
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_q76l4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_jf8pu"]
+font = ExtResource("13_b4msk")
+font_size = 36
 
 [node name="Limbo" type="Node2D"]
 script = ExtResource("1_gdu24")
@@ -211,3 +216,18 @@ position = Vector2(362.0001, 864.5)
 scale = Vector2(3294, 317)
 texture = SubResource("CanvasTexture_q76l4")
 script = ExtResource("11_xfhat")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 184.0
+offset_top = 292.0
+offset_right = 618.0
+offset_bottom = 330.0
+text = "Clique R para mudar de máscara"
+label_settings = SubResource("LabelSettings_jf8pu")
